@@ -13,8 +13,9 @@
             background-color: #f8f0f0;
             color: #333;
             margin: 0;
-            padding-top: 60px; /* Reducido para header más compacto */
-            font-size: 14.5px; /* Reducido el tamaño base ligeramente para móviles primero */
+            padding-top: 60px; /* Espacio para header fijo */
+            font-size: 14px; /* Tamaño base ajustado para móviles */
+            line-height: 1.5;
         }
 
         /* Colores principales UPAEP (Rojos) */
@@ -29,13 +30,13 @@
         .main-header {
             background: linear-gradient(90deg, var(--upaep-red-primary) 0%, var(--upaep-red-dark) 100%);
             color: white;
-            padding: 0.6rem 1rem; /* Padding reducido */
+            padding: 0.5rem 0.8rem; /* Padding ajustado */
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             z-index: 1000;
-            box-shadow: 0 2px_8px rgba(0,0,0,0.1);
+            box-shadow: 0 2px_6px rgba(0,0,0,0.1);
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -47,16 +48,16 @@
         }
 
         .upaep-logo-header {
-            width: 40px; /* Logo más pequeño */
-            height: 20px;
+            width: 38px;
+            height: 19px;
             background-image: url('https://placehold.co/100x50/FFFFFF/C00000?text=UPAEP&font=inter');
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
-            margin-right: 0.7rem;
+            margin-right: 0.6rem;
         }
         .main-header-title {
-            font-size: 1rem; /* Título del header reducido */
+            font-size: 0.95rem;
             font-weight: 700;
             display: none;
         }
@@ -65,21 +66,21 @@
             font-family: 'Inter', sans-serif;
             background-color: transparent;
             color: white;
-            padding: 0.3rem 0.6rem; /* Padding de botones reducido */
-            border: 2px solid transparent;
-            border-radius: 5px;
-            font-size: 0.8rem; /* Fuente de botones reducida */
+            padding: 0.3rem 0.5rem;
+            border: 1px solid transparent; /* Borde más delgado para mantener alineación */
+            border-radius: 4px;
+            font-size: 0.75rem;
             font-weight: 600;
             cursor: pointer;
             transition: background-color 0.3s, border-color 0.3s;
-            margin-left: 0.2rem; /* Espacio entre botones reducido */
+            margin-left: 0.1rem;
         }
-        .main-navigation button .button-icon { font-size: 1.1rem; } /* Tamaño de icono en botón */
-        .main-navigation button .button-text { display: none; } /* Texto oculto por defecto */
+        .main-navigation button .button-icon { font-size: 1rem; }
+        .main-navigation button .button-text { display: none; }
 
         .main-navigation button:hover {
             background-color: rgba(255,255,255,0.1);
-            border-color: rgba(255,255,255,0.3);
+            border-color: rgba(255,255,255,0.2);
         }
         .main-navigation button.active-nav {
             background-color: rgba(255,255,255,0.2);
@@ -88,7 +89,7 @@
         }
 
         .page-section-container {
-            padding: 15px;
+            padding: 12px; /* Padding general reducido */
             max-width: 1100px;
             margin: 0 auto;
         }
@@ -97,124 +98,175 @@
 
         .card {
             background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 8px 12px -3px rgba(0, 0, 0, 0.08), 0 3px 5px -2px rgba(0, 0, 0, 0.04);
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-            margin-bottom: 1.5rem;
+            border-radius: 8px; /* Bordes más sutiles */
+            box-shadow: 0 6px 10px -3px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
+            transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+            margin-bottom: 1.2rem;
         }
         .card:hover:not(.no-hover-effect) {
-            transform: translateY(-4px);
-            box-shadow: 0 15px 20px -5px rgba(0, 0, 0, 0.08), 0 8px 8px -5px rgba(0, 0, 0, 0.03);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 18px -5px rgba(0, 0, 0, 0.07), 0 6px 6px -5px rgba(0, 0, 0, 0.03);
         }
         .section-title {
             color: var(--upaep-red-dark);
             border-bottom: 2px solid var(--upaep-accent-gold);
-            padding-bottom: 0.4rem;
-            margin-bottom: 1.2rem;
+            padding-bottom: 0.3rem;
+            margin-bottom: 1rem;
             font-weight: 700;
-            font-size: 1.6rem; /* Título de sección reducido para móvil */
+            font-size: 1.4rem; /* Título de sección más pequeño */
         }
         .icon-placeholder {
-            font-size: 1.2rem; /* Iconos reducidos */
-            margin-right: 0.5rem;
+            font-size: 1.1rem;
+            margin-right: 0.4rem;
             color: var(--upaep-red-primary);
         }
         .card p, .card ul li {
-            font-size: 0.85rem; /* Texto general dentro de tarjetas reducido para móvil */
-            line-height: 1.55;
+            font-size: 0.8rem; /* Texto general más pequeño */
+            line-height: 1.5;
         }
-         .card .text-lg { /* Para los párrafos introductorios */
-            font-size: 0.95rem; /* Ajustado para móvil */
+         .card .text-lg {
+            font-size: 0.9rem;
         }
 
         .accordion-header {
-            cursor: pointer; padding: 0.7rem; background-color: #fce8e6;
-            border-radius: 6px; margin-bottom: 0.4rem; display: flex;
+            cursor: pointer; padding: 0.6rem; background-color: #fce8e6;
+            border-radius: 5px; margin-bottom: 0.3rem; display: flex;
             justify-content: space-between; align-items: center;
             transition: background-color 0.3s ease; font-weight: 600;
             color: var(--upaep-red-dark);
-            font-size: 0.9rem; /* Texto de header de acordeón reducido */
+            font-size: 0.85rem;
         }
         .accordion-header:hover { background-color: #f9d7d3; }
         .accordion-content {
-            max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out, padding 0.4s ease-out;
-            background-color: #fff8f7; border-radius: 0 0 6px 6px; padding: 0 0.8rem;
-            font-size: 0.8rem; /* Texto dentro de acordeón reducido */
+            max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+            background-color: #fff8f7; border-radius: 0 0 5px 5px; padding: 0 0.7rem;
+            font-size: 0.78rem;
         }
-        .accordion-content.active { max-height: 700px; padding: 0.8rem; }
-        .accordion-arrow { transition: transform 0.3s ease; font-size: 1rem; color: var(--upaep-red-primary); }
+        .accordion-content.active { max-height: 600px; padding: 0.7rem; }
+        .accordion-arrow { transition: transform 0.3s ease; font-size: 0.9rem; color: var(--upaep-red-primary); }
         .accordion-header.active .accordion-arrow { transform: rotate(90deg); }
         .accordion-item .text-red-700, .accordion-item .text-blue-700 {
              color: var(--upaep-red-dark) !important;
-             font-size: 1rem; /* Ajustado */
+             font-size: 0.95rem; /* Títulos H3/H4 dentro de acordeón */
         }
+        .accordion-content ul { margin-left: 1rem; } /* Indentación para listas */
+        .accordion-content ul li { margin-bottom: 0.3rem; }
+
 
         .tab-buttons button {
-            padding: 0.5rem 1rem; margin-right: 0.3rem; border-radius: 6px 6px 0 0;
+            padding: 0.4rem 0.8rem; margin-right: 0.2rem; border-radius: 5px 5px 0 0;
             background-color: #fce8e6; border: 1px solid #f9d7d3; border-bottom: none;
             font-weight: 600; color: var(--upaep-red-dark); transition: background-color 0.3s ease, color 0.3s ease;
-            font-size: 0.85rem; /* Texto de botones de tab reducido */
+            font-size: 0.8rem;
         }
         .tab-buttons button.active { background-color: var(--upaep-red-primary); color: white; border-color: var(--upaep-red-primary); }
         .tab-buttons button:hover:not(.active) { background-color: #f9d7d3; }
         .tab-content {
-            display: none; padding: 1rem; border: 1px solid #f9d7d3; border-top: none;
-            border-radius: 0 0 6px 6px; background-color: white;
-            font-size: 0.8rem; /* Texto dentro de tabs reducido */
+            display: none; padding: 0.8rem; border: 1px solid #f9d7d3; border-top: none;
+            border-radius: 0 0 5px 5px; background-color: white;
+            font-size: 0.78rem;
         }
         .tab-content.active { display: block; }
-        .benefit-card-tab { border-left: 4px solid #28a745; }
-        .danger-card-tab { border-left: 4px solid var(--upaep-red-light); }
-        .tab-content .text-2xl { font-size: 1.1rem !important; } /* Títulos H3 dentro de tabs */
-        .tab-content .text-green-700 { color: #1e7e34 !important; }
-        .tab-content .text-red-700 { color: var(--upaep-red-dark) !important; }
-        .tab-content .text-green-600 { color: #28a745 !important; }
-        .tab-content .text-red-600 { color: var(--upaep-red-primary) !important; }
+        .benefit-card-tab { border-left: 3px solid #28a745; }
+        .danger-card-tab { border-left: 3px solid var(--upaep-red-light); }
+        .tab-content .text-2xl { font-size: 1rem !important; margin-bottom: 0.5rem !important; } /* Títulos H3 dentro de tabs */
+        .tab-content ul { margin-left: 1rem; }
+        .tab-content ul li { margin-bottom: 0.3rem; }
+
 
         .menu-section-container {
-            background-color: white; padding: 2rem 1.5rem; border-radius: 12px;
-            box-shadow: 0 15px 20px -5px rgba(0, 0, 0, 0.08), 0 8px 8px -5px rgba(0, 0, 0, 0.03);
-            text-align: center; max-width: 650px; margin: 1.5rem auto;
+            background-color: white; padding: 1.5rem 1rem; border-radius: 10px;
+            box-shadow: 0 12px 18px -5px rgba(0, 0, 0, 0.07), 0 6px 6px -5px rgba(0, 0, 0, 0.03);
+            text-align: center; max-width: 600px; margin: 1.2rem auto;
         }
-        .menu-project-title { font-size: 2rem; font-weight: 800; color: var(--upaep-red-dark); margin-bottom: 0.8rem; }
-        .menu-project-subtitle { font-size: 0.95rem; color: #4a5568; margin-bottom: 1.8rem; }
+        .menu-project-title { font-size: 1.8rem; font-weight: 800; color: var(--upaep-red-dark); margin-bottom: 0.6rem; }
+        .menu-project-subtitle { font-size: 0.9rem; color: #4a5568; margin-bottom: 1.5rem; }
         .menu-upaep-logo {
-            width: 90px; height: 45px; margin: 0 auto 1.2rem auto;
+            width: 80px; height: 40px; margin: 0 auto 1rem auto;
             background-image: url('https://placehold.co/120x60/C00000/FFFFFF?text=UPAEP&font=inter');
             background-size: contain; background-repeat: no-repeat; background-position: center;
         }
-        .menu-navigation-buttons { display: flex; flex-direction: column; gap: 1rem; }
+        .menu-navigation-buttons { display: flex; flex-direction: column; gap: 0.8rem; }
         .menu-nav-button {
             display: block; background: linear-gradient(90deg, var(--upaep-red-primary) 0%, var(--upaep-red-dark) 100%);
-            color: white; padding: 0.7rem 1rem; border-radius: 8px; font-size: 0.95rem;
+            color: white; padding: 0.6rem 0.8rem; border-radius: 6px; font-size: 0.9rem;
             font-weight: 600; text-decoration: none; transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1); cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); cursor: pointer;
         }
         .menu-nav-button:hover {
-            transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 8px 12px -3px rgba(0, 0, 0, 0.08), 0 3px 5px -2px rgba(0, 0, 0, 0.04);
+            transform: translateY(-2px) scale(1.01);
+            box-shadow: 0 6px 10px -3px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
         }
-        .menu-nav-button .icon { margin-right: 0.5rem; font-size: 1rem; }
+        .menu-nav-button .icon { margin-right: 0.4rem; font-size: 0.9rem; }
+
+        .media-card {
+            background-color: #fff;
+            padding: 1.2rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.07);
+            max-width: 360px; /* Reducido para móviles */
+            margin: 1.2rem auto;
+        }
+        .media-card h3 {
+            font-size: 1.2rem;
+            color: var(--upaep-red-dark);
+            margin-bottom: 0.6rem;
+            font-weight: 700;
+        }
+        .media-card p {
+            font-size: 0.8rem;
+            color: #555;
+            margin-bottom: 0.8rem;
+        }
+        .media-card .menu-nav-button {
+            margin-top: 0.6rem; font-size: 0.9rem; padding: 0.6rem 0.8rem;
+        }
+         .media-card .text-sm {
+            font-size: 0.7rem;
+         }
+        .tiktok-embed-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 1rem;
+            width: 100%;
+            max-width: 325px; /* Mantenemos el ancho mínimo de TikTok */
+            /* La altura se ajustará por el script de TikTok, pero podemos darle una altura mínima al contenedor */
+            min-height: 500px; /* Reducido para no ocupar tanto espacio vertical en móvil */
+            margin-left: auto;
+            margin-right: auto;
+            overflow: hidden;
+            border: 1px solid #f0f0f0; /* Borde más sutil */
+            border-radius: 6px;
+        }
+        .tiktok-embed {
+            min-width: 325px !important;
+            width: 100% !important;
+            max-width: 100% !important; /* Asegurar que no exceda el contenedor */
+            margin: 0 auto !important;
+            box-shadow: none !important;
+        }
 
         .cta-section {
             background: linear-gradient(135deg, var(--upaep-red-primary) 0%, var(--upaep-red-dark) 100%); color: white;
-            border-radius: 10px; padding: 1.5rem; text-align: center; margin-top: 1.5rem;
+            border-radius: 8px; padding: 1.2rem; text-align: center; margin-top: 1.2rem;
         }
-        .cta-section .text-3xl { font-size: 1.4rem !important; }
-        .cta-section .text-xl { font-size: 0.9rem !important; }
-        .cta-section .text-2xl { font-size: 1.1rem !important; }
+        .cta-section .text-3xl { font-size: 1.3rem !important; }
+        .cta-section .text-xl { font-size: 0.85rem !important; }
+        .cta-section .text-2xl { font-size: 1rem !important; }
 
         .main-footer {
-            text-align: center; padding: 1.5rem; border-top: 1px solid #e2e8f0;
-            font-size: 0.8rem; color: #4a5568; background-color: #f9f9f9;
+            text-align: center; padding: 1.2rem; border-top: 1px solid #e2e8f0;
+            font-size: 0.75rem; color: #4a5568; background-color: #f9f9f9;
         }
 
         @media (min-width: 768px) { /* md y más grandes */
-            body { font-size: 15.5px; padding-top: 70px; } /* Restaurar padding-top si el header es más alto */
+            body { font-size: 15.5px; padding-top: 70px; }
             .main-header { padding: 0.8rem 1.5rem; }
             .upaep-logo-header { width: 50px; height: 25px; margin-right: 1rem;}
             .main-header-title { display: block; font-size: 1.1rem;}
-            .main-navigation button { padding: 0.5rem 0.8rem; font-size: 0.85rem; margin-left: 0.4rem;}
+            .main-navigation button { padding: 0.5rem 0.8rem; font-size: 0.85rem; margin-left: 0.2rem;}
             .main-navigation button .button-text { display: inline; margin-left: 0.3rem;}
             .main-navigation button .button-icon { font-size: 1.1rem; }
 
@@ -235,7 +287,11 @@
             .menu-project-title { font-size: 2.4rem; }
             .menu-project-subtitle { font-size: 1.05rem; }
             .menu-navigation-buttons { flex-direction: row; justify-content: center; }
-            .menu-nav-button { min-width: 220px; font-size: 1rem; padding: 0.9rem 1.3rem;}
+            .menu-nav-button { min-width: 200px; font-size: 1rem; padding: 0.9rem 1.3rem;}
+
+            .media-card h3 { font-size: 1.6rem; }
+            .media-card p { font-size: 0.95rem; }
+            .tiktok-embed-container { max-width: 350px; min-height: 580px; }
 
             .cta-section .text-3xl { font-size: 1.8rem !important; }
             .cta-section .text-xl { font-size: 1.05rem !important; }
@@ -243,11 +299,12 @@
             .main-footer { font-size: 0.85rem; }
         }
         @media (min-width: 1024px) { /* lg y más grandes */
-             body { font-size: 16px; } /* Tamaño base para pantallas grandes */
+             body { font-size: 16px; }
              .section-title { font-size: 2rem; }
              .menu-project-title { font-size: 2.5rem; }
              .menu-project-subtitle { font-size: 1.1rem; }
              .main-navigation button { font-size: 0.9rem; padding: 0.5rem 1rem;}
+             .tiktok-embed-container { max-width: 380px; min-height: 600px; }
         }
 
     </style>
@@ -264,6 +321,7 @@
             <button onclick="showPage('page-derechos')" id="nav-derechos"><span class="button-icon">🛡️</span><span class="button-text"> Derechos</span></button>
             <button onclick="showPage('page-alfin')" id="nav-alfin"><span class="button-icon">🧠</span><span class="button-text"> ALFIN</span></button>
             <button onclick="showPage('page-juegos')" id="nav-juegos"><span class="button-icon">🎮</span><span class="button-text"> Juegos</span></button>
+            <button onclick="showPage('page-videos')" id="nav-videos"><span class="button-icon">🎬</span><span class="button-text"> Videos</span></button>
         </nav>
     </header>
 
@@ -273,7 +331,7 @@
             <div class="menu-section-container">
                 <div class="menu-upaep-logo"></div>
                 <h1 class="menu-project-title">Competencias Digitales Esenciales</h1>
-                <p class="menu-project-subtitle">Explora los fundamentos de la Alfabetización Informacional y los Derechos Digitales para navegar con seguridad y criterio en el mundo online. ¡Y diviértete con nuestros juegos educativos!</p>
+                <p class="menu-project-subtitle">Explora los fundamentos de la Alfabetización Informacional y los Derechos Digitales. ¡Aprende y diviértete con nuestros recursos interactivos!</p>
                 <div class="menu-navigation-buttons">
                     <button onclick="showPage('page-derechos')" class="menu-nav-button">
                         <span class="icon">🛡️</span> Derechos Digitales
@@ -284,15 +342,20 @@
                      <button onclick="showPage('page-juegos')" class="menu-nav-button">
                         <span class="icon">🎮</span> Juegos Educativos
                     </button>
+                    <button onclick="showPage('page-videos')" class="menu-nav-button">
+                        <span class="icon">🎬</span> Videos Explicativos
+                    </button>
                 </div>
             </div>
         </div>
 
         <div id="page-derechos" class="page-section hidden-section">
-            <div class="card p-4 md:p-6"> <h2 class="text-3xl section-title flex items-center">
+            <div class="card p-4 md:p-6">
+                <h2 class="text-3xl section-title flex items-center">
                     <span class="icon-placeholder">🛡️</span>¿QUÉ SON LOS DERECHOS DIGITALES?
                 </h2>
-                <p class="text-lg mb-4 md:mb-6"> Son tus derechos humanos aplicados al entorno digital. Garantizan tu libertad, seguridad y participación justa en internet. Haz clic en cada aspecto para saber más:
+                <p class="text-lg mb-4 md:mb-6">
+                    Son tus derechos humanos aplicados al entorno digital. Garantizan tu libertad, seguridad y participación justa en internet. Haz clic en cada aspecto para saber más:
                 </p>
                 <div id="aspectos-clave-accordion-derechos" class="space-y-2">
                     <div class="accordion-item"><div class="accordion-header"><h3 class="text-xl font-semibold text-red-700"><span class="icon-placeholder">🌐</span>Acceso a Internet</h3><span class="accordion-arrow">&#x276F;</span></div><div class="accordion-content"><p>Considerado un derecho fundamental para garantizar que todas las personas puedan acceder a la información, la educación, servicios y oportunidades que ofrece el mundo digital, ayudando a reducir la brecha digital.</p></div></div>
@@ -304,8 +367,10 @@
                 </div>
             </div>
 
-            <div id="beneficios-peligros-derechos" class="my-6 md:my-8"> <h2 class="text-3xl section-title text-center mb-4 md:mb-6">DOMINARLOS TE BENEFICIA ✅ VS. IGNORARLOS TE PONE EN RIESGO ⚠️</h2>
-                <div class="tab-buttons mb-0 flex flex-wrap justify-center md:justify-start"> <button class="tab-button active" onclick="openTab(event, 'beneficios-derechos', 'beneficios-peligros-derechos')">BENEFICIOS</button>
+            <div id="beneficios-peligros-derechos" class="my-6 md:my-8">
+                <h2 class="text-3xl section-title text-center mb-4 md:mb-6">DOMINARLOS TE BENEFICIA ✅ VS. IGNORARLOS TE PONE EN RIESGO ⚠️</h2>
+                <div class="tab-buttons mb-0 flex flex-wrap justify-center md:justify-start">
+                    <button class="tab-button active" onclick="openTab(event, 'beneficios-derechos', 'beneficios-peligros-derechos')">BENEFICIOS</button>
                     <button class="tab-button" onclick="openTab(event, 'peligros-derechos', 'beneficios-peligros-derechos')">PELIGROS</button>
                 </div>
                 <div id="beneficios-derechos" class="tab-content active card p-4 md:p-6 benefit-card-tab no-hover-effect"><h3 class="text-2xl font-semibold text-green-700 mb-3">BENEFICIOS (¡Al Dominarlos!)</h3><ul class="list-disc list-inside space-y-2 text-gray-700"><li><span class="icon-placeholder text-green-600">🛡️</span><strong>Mayor Protección:</strong> Salvaguarda tu privacidad, datos personales e identidad digital contra abusos y ciberataques.</li><li><span class="icon-placeholder text-green-600">🗣️</span><strong>Voz Segura y Responsable:</strong> Ejerce tu libertad de expresión online de manera informada, conociendo tus derechos y responsabilidades.</li><li><span class="icon-placeholder text-green-600">⚖️</span><strong>Justicia Digital:</strong> Conoce los mecanismos para actuar y defenderte ante violaciones de tus derechos en el entorno virtual.</li><li><span class="icon-placeholder text-green-600">🌐</span><strong>Participación Plena e Informada:</strong> Accede equitativamente a información, educación, cultura y oportunidades de desarrollo que ofrece el mundo digital.</li><li><span class="icon-placeholder text-green-600">🤖</span><strong>Control y Transparencia ante la IA:</strong> Comprende el impacto de la Inteligencia Artificial y exige que los sistemas algorítmicos sean éticos, justos y transparentes.</li><li><span class="icon-placeholder text-green-600">💡</span><strong>Empoderamiento Digital:</strong> Toma decisiones conscientes y seguras sobre tu vida digital, gestionando activamente tu huella e identidad online.</li></ul></div>
@@ -387,7 +452,7 @@
                 <p class="text-lg mb-4 md:mb-6 text-center">
                     ¡Pon a prueba tus conocimientos y diviértete aprendiendo sobre competencias digitales!
                 </p>
-                <div class="game-card menu-section-container no-hover-effect" style="max-width: 450px; padding: 1.5rem;"> <h3 style="font-size: 1.5rem; color: var(--upaep-red-dark); margin-bottom: 0.8rem; font-weight: 700;">Memorama ALFIN</h3>
+                <div class="media-card menu-section-container no-hover-effect" style="max-width: 450px; padding: 1.5rem;"> <h3 style="font-size: 1.5rem; color: var(--upaep-red-dark); margin-bottom: 0.8rem; font-weight: 700;">Memorama ALFIN</h3>
                     <p style="font-size: 0.9rem; color: #555; margin-bottom: 1.2rem;">Encuentra los pares de conceptos clave sobre Alfabetización Informacional.</p>
                     <a href="memorama_alfin.html" target="_blank" class="menu-nav-button" style="font-size: 0.95rem; padding: 0.7rem 1rem;">
                         <span class="icon">🧠</span> Jugar Memorama
@@ -397,14 +462,35 @@
             </div>
         </div>
 
+        <div id="page-videos" class="page-section hidden-section">
+            <div class="card p-4 md:p-6">
+                <h2 class="text-3xl section-title flex items-center">
+                    <span class="icon-placeholder">🎬</span>Videos Educativos
+                </h2>
+                <p class="text-lg mb-4 md:mb-6 text-center">
+                    Explora nuestros TikToks y aprende de forma rápida y visual sobre Alfabetización Informacional y Derechos Digitales.
+                </p>
+                <div class="media-card menu-section-container no-hover-effect" style="max-width: 450px; padding: 1.5rem;">
+                    <h3 style="font-size: 1.5rem; color: var(--upaep-red-dark); margin-bottom: 0.8rem; font-weight: 700;">Video: Los Derechos Digitales</h3>
+                    <p style="font-size: 0.9rem; color: #555; margin-bottom: 1.2rem;">Un vistazo rápido a tus derechos en el mundo online.</p>
+                    
+                    <div class="tiktok-embed-container">
+                        <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@juan.ca2835/video/7503459743546084663" data-video-id="7503459743546084663"> <section> <a target="_blank" title="@juan.ca2835" href="https://www.tiktok.com/@juan.ca2835?refer=embed">@juan.ca2835</a> Los Derechos Digitales <a title="digitalmenteconscientesupaep" target="_blank" href="https://www.tiktok.com/tag/digitalmenteconscientesupaep?refer=embed">#DigitalmenteConscientesUPAEP</a> <a title="upaep" target="_blank" href="https://www.tiktok.com/tag/upaep?refer=embed">#UPAEP</a> <a target="_blank" title="♬ sonido original  - Juan Ca" href="https://www.tiktok.com/music/sonido-original-Juan-Ca-7503459773288483639?refer=embed">♬ sonido original  - Juan Ca</a> </section> </blockquote>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </main>
 
     <footer class="main-footer">
-        <p>Realizado en parejas por: [Nombres de Alumnos]</p>
-        <p>Asesoría: [Nombres de Asesores]</p>
+        <p id="realizado-por">Realizado en parejas por: Juan Carlos González Jiménez, Juan Carlos Benítez Fernández y Santiago Malaver.</p>
+        <p id="asesoria">Asesoría: Ana Cristina Gómez Vallarta.</p>
         <p>Basado en la investigación: "Alfabetización digital y derechos digitales" - UPAEP</p>
         <p>&copy; <span id="currentYearSPA"></span> UPAEP. Todos los derechos reservados.</p>
     </footer>
+
+    <script async src="https://www.tiktok.com/embed.js"></script>
 
     <script>
         // --- Lógica de Navegación SPA ---
@@ -453,7 +539,9 @@
         
         function setupAccordion(accordionId) {
             const accordion = document.getElementById(accordionId);
-            if (!accordion || accordion.dataset.accordionInitialized === 'true') return;
+            if (!accordion || accordion.dataset.accordionInitialized === 'true') {
+                return;
+            }
 
             const items = accordion.querySelectorAll('.accordion-item');
             items.forEach(item => {
@@ -532,7 +620,6 @@
 
         document.addEventListener('DOMContentLoaded', function() {
             showPage('page-menu');
-            // Las inicializaciones de acordeones y tabs se manejan dentro de showPage y initializePageInteractivity
             document.getElementById('currentYearSPA').textContent = new Date().getFullYear();
         });
     </script>
