@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Competencias Digitales Esenciales - UPAEP</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos Generales del Body */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f0f0; /* Un fondo ligeramente rojizo/crema muy claro */
+            color: #333;
+            margin: 0;
+            padding-top: 80px; /* Espacio para el header fijo */
+        }
+
+        /* Colores principales UPAEP (Rojos) */
+        :root {
+            --upaep-red-dark: #C00000; /* Un rojo oscuro, puedes ajustarlo al exacto */
+            --upaep-red-primary: #E81123; /* Un rojo principal brillante, como el del logo */
+            --upaep-red-light: #FF5252; /* Un rojo más claro para acentos o hovers */
+            --upaep-accent-gold: #f0a500; /* Mantenemos el dorado como acento */
+        }
+
+        /* Header de Navegación Fijo */
+        .main-header {
+            background: linear-gradient(90deg, var(--upaep-red-primary) 0%, var(--upaep-red-dark) 100%);
+            color: white;
+            padding: 1rem 1.5rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-logo-title {
+            display: flex;
+            align-items: center;
+        }
+
+        .upaep-logo-header {
+            width: 50px;
+            height: 25px;
+            background-image: url('https://placehold.co/100x50/FFFFFF/C00000?text=UPAEP&font=inter');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            margin-right: 1rem;
+        }
+        .main-header-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            display: none;
+        }
+
+        .main-navigation button {
+            font-family: 'Inter', sans-serif;
+            background-color: transparent;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: 2px solid transparent;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+            margin-left: 0.5rem;
+        }
+        .main-navigation button .button-text { display: none; }
+
+        .main-navigation button:hover {
+            background-color: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.3);
+        }
+        .main-navigation button.active-nav {
+            background-color: rgba(255,255,255,0.2);
+            border-color: var(--upaep-accent-gold);
+            font-weight: 700;
+        }
+
+        .page-section-container {
+            padding: 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .hidden-section { display: none !important; }
+
+        .card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            margin-bottom: 2rem;
+        }
+        .card:hover:not(.no-hover-effect) {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .section-title {
+            color: var(--upaep-red-dark);
+            border-bottom: 3px solid var(--upaep-accent-gold);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            font-size: 2rem;
+        }
+        .icon-placeholder {
+            font-size: 1.5rem;
+            margin-right: 0.75rem;
+            color: var(--upaep-red-primary);
+        }
+
+        .accordion-header {
+            cursor: pointer; padding: 1rem; background-color: #fce8e6;
+            border-radius: 8px; margin-bottom: 0.5rem; display: flex;
+            justify-content: space-between; align-items: center;
+            transition: background-color 0.3s ease; font-weight: 600;
+            color: var(--upaep-red-dark);
+        }
+        .accordion-header:hover { background-color: #f9d7d3; }
+        .accordion-content {
+            max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+            background-color: #fff8f7; border-radius: 0 0 8px 8px; padding: 0 1rem;
+        }
+        .accordion-content.active { max-height: 700px; padding: 1rem; }
+        .accordion-arrow { transition: transform 0.3s ease; font-size: 1.2rem; color: var(--upaep-red-primary); }
+        .accordion-header.active .accordion-arrow { transform: rotate(90deg); }
+        .accordion-content p, .accordion-content ul { color: #444; }
+        .accordion-item .text-red-700 { color: var(--upaep-red-dark) !important; }
+        .accordion-item .text-blue-700 { color: var(--upaep-red-dark) !important; }
+
+
+        .tab-buttons button {
+            padding: 0.75rem 1.5rem; margin-right: 0.5rem; border-radius: 8px 8px 0 0;
+            background-color: #fce8e6; border: 1px solid #f9d7d3; border-bottom: none;
+            font-weight: 600; color: var(--upaep-red-dark); transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .tab-buttons button.active { background-color: var(--upaep-red-primary); color: white; border-color: var(--upaep-red-primary); }
+        .tab-buttons button:hover:not(.active) { background-color: #f9d7d3; }
+        .tab-content {
+            display: none; padding: 1.5rem; border: 1px solid #f9d7d3; border-top: none;
+            border-radius: 0 0 8px 8px; background-color: white;
+        }
+        .tab-content.active { display: block; }
+        .benefit-card-tab { border-left: 5px solid #28a745; }
+        .danger-card-tab { border-left: 5px solid var(--upaep-red-light); }
+        .tab-content .text-green-700 { color: #1e7e34 !important; }
+        .tab-content .text-red-700 { color: var(--upaep-red-dark) !important; }
+        .tab-content .text-green-600 { color: #28a745 !important; }
+        .tab-content .text-red-600 { color: var(--upaep-red-primary) !important; }
+
+
+        .menu-section-container {
+            background-color: white; padding: 2.5rem 2rem; border-radius: 16px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            text-align: center; max-width: 700px; margin: 2rem auto;
+        }
+        .menu-project-title { font-size: 2.5rem; font-weight: 800; color: var(--upaep-red-dark); margin-bottom: 1rem; }
+        .menu-project-subtitle { font-size: 1.1rem; color: #4a5568; margin-bottom: 2.5rem; }
+        .menu-upaep-logo {
+            width: 100px; height: 50px; margin: 0 auto 1.5rem auto;
+            background-image: url('https://placehold.co/120x60/C00000/FFFFFF?text=UPAEP&font=inter');
+            background-size: contain; background-repeat: no-repeat; background-position: center;
+        }
+        .menu-navigation-buttons { display: flex; flex-direction: column; gap: 1.5rem; }
+        .menu-nav-button { /* Estilo para los botones grandes en la página de inicio y juegos */
+            display: block; background: linear-gradient(90deg, var(--upaep-red-primary) 0%, var(--upaep-red-dark) 100%);
+            color: white; padding: 1rem 1.5rem; border-radius: 10px; font-size: 1.1rem;
+            font-weight: 600; text-decoration: none; transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); cursor: pointer;
+        }
+        .menu-nav-button:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .menu-nav-button .icon { margin-right: 0.75rem; font-size: 1.2rem; }
+
+        /* Estilos para la sección de Juegos */
+        .game-card {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            max-width: 400px;
+            margin: 2rem auto;
+        }
+        .game-card h3 {
+            font-size: 1.8rem;
+            color: var(--upaep-red-dark);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        .game-card p {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
+        .game-card .menu-nav-button { /* Reutilizar estilo de botón */
+            margin-top: 1rem;
+        }
+
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--upaep-red-primary) 0%, var(--upaep-red-dark) 100%); color: white;
+            border-radius: 12px; padding: 2rem; text-align: center; margin-top: 2rem;
+        }
+        .main-footer {
+            text-align: center; padding: 2rem; border-top: 1px solid #e2e8f0;
+            font-size: 0.9rem; color: #4a5568; background-color: #f9f9f9;
+        }
+
+        @media (min-width: 768px) { /* md */
+            .main-header-title { display: block; }
+            .main-navigation button .button-text { display: inline; margin-left: 0.3rem;}
+            .menu-navigation-buttons { flex-direction: row; justify-content: center; }
+            .menu-nav-button { min-width: 230px; }
+        }
+        @media (max-width: 639px) { /* sm */
+             .main-navigation button { padding: 0.5rem; font-size:1.2rem; }
+             .menu-project-title {font-size: 2rem;}
+             .menu-project-subtitle {font-size: 1rem;}
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="header-logo-title">
+            <div class="upaep-logo-header"></div>
+            <h1 class="main-header-title">Competencias Digitales</h1>
+        </div>
+        <nav class="main-navigation">
+            <button onclick="showPage('page-menu')" id="nav-menu" class="active-nav">🏠<span class="button-text"> Inicio</span></button>
+            <button onclick="showPage('page-derechos')" id="nav-derechos">🛡️<span class="button-text"> Derechos</span></button>
+            <button onclick="showPage('page-alfin')" id="nav-alfin">🧠<span class="button-text"> ALFIN</span></button>
+            <button onclick="showPage('page-juegos')" id="nav-juegos">🎮<span class="button-text"> Juegos</span></button>
+        </nav>
+    </header>
+
+    <main id="main-content-area" class="page-section-container">
+
+        <div id="page-menu" class="page-section">
+            <div class="menu-section-container">
+                <div class="menu-upaep-logo"></div>
+                <h1 class="menu-project-title">Competencias Digitales Esenciales</h1>
+                <p class="menu-project-subtitle">Explora los fundamentos de la Alfabetización Informacional y los Derechos Digitales para navegar con seguridad y criterio en el mundo online. ¡Y diviértete con nuestros juegos educativos!</p>
+                <div class="menu-navigation-buttons">
+                    <button onclick="showPage('page-derechos')" class="menu-nav-button">
+                        <span class="icon">🛡️</span> Derechos Digitales
+                    </button>
+                    <button onclick="showPage('page-alfin')" class="menu-nav-button">
+                        <span class="icon">🧠</span> Alfabetización Informacional
+                    </button>
+                     <button onclick="showPage('page-juegos')" class="menu-nav-button">
+                        <span class="icon">🎮</span> Juegos Educativos
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="page-derechos" class="page-section hidden-section">
+            <div class="card p-6 md:p-8">
+                <h2 class="text-3xl section-title flex items-center">
+                    <span class="icon-placeholder">🛡️</span>¿QUÉ SON LOS DERECHOS DIGITALES?
+                </h2>
+                <p class="text-lg mb-6">
+                    Son tus derechos humanos aplicados al entorno digital. Garantizan tu libertad, seguridad y participación justa en internet. Haz clic en cada aspecto para saber más:
+                </p>
+                <div id="aspectos-clave-accordion-derechos" class="space-y-2">
+                    <div class="accordion-item"><div class="accordion-header"><h3 class="text-xl font-semibold text-red-700"><span class="icon-placeholder">🌐</span>Acceso a Internet</h3><span class="accordion-arrow">&#x276F;</span></div><div class="accordion-content"><p>Considerado un derecho fundamental para garantizar que todas las personas puedan acceder a la información, la educación, servicios y oportunidades que ofrece el mundo digital, ayudando a reducir la brecha digital.</p></div></div>
+                    <div class="accordion-item"><div class="accordion-header"><h3 class="text-xl font-semibold text-red-700"><span class="icon-placeholder">🗣️</span>Libertad de Expresión Online</h3><span class="accordion-arrow">&#x276F;</span></div><div class="accordion-content"><p>El derecho a expresar ideas, opiniones e información libremente en plataformas digitales. Sin embargo, esta libertad conlleva la responsabilidad de no incurrir en discursos de odio, difamación o incitación a la violencia, respetando siempre la dignidad y los derechos de terceros.</p></div></div>
+                    <div class="accordion-item"><div class="accordion-header"><h3 class="text-xl font-semibold text-red-700"><span class="icon-placeholder">🔒</span>Privacidad y Protección de Datos</h3><span class="accordion-arrow">&#x276F;</span></div><div class="accordion-content"><p>Garantiza que tu información personal no sea recopilada, usada o compartida sin tu consentimiento explícito. Incluye el control sobre tus datos y la protección contra la vigilancia. Leyes como el RGPD en Europa o la Ley Olimpia en México (que castiga la difusión no consentida de contenido íntimo) refuerzan este derecho.</p></div></div>
+                    <div class="accordion-item"><div class="accordion-header"><h3 class="text-xl font-semibold text-red-700"><span class="icon-placeholder">🗑️</span>Derecho al Olvido</h3><span class="accordion-arrow">&#x276F;</span></div><div class="accordion-content"><p>Permite a las personas solicitar la eliminación de sus datos personales de búsquedas en línea, bases de datos o archivos si la información es obsoleta, irrelevante, inexacta o perjudicial, y no existe un interés público superior que justifique su permanencia.</p></div></div>
+                    <div class="accordion-item"><div class="accordion-header"><h3 class="text-xl font-semibold text-red-700"><span class="icon-placeholder">🛡️</span>Seguridad Digital</h3><span class="accordion-arrow">&#x276F;</span></div><div class="accordion-content"><p>El derecho a navegar y utilizar servicios digitales de forma segura, protegido contra amenazas como el malware, phishing, ciberacoso, robo de identidad y otras formas de ciberdelincuencia. Implica también la protección contra la vigilancia masiva e injustificada.</p></div></div>
+                    <div class="accordion-item"><div class="accordion-header"><h3 class="text-xl font-semibold text-red-700"><span class="icon-placeholder">💡</span>Propiedad Intelectual</h3><span class="accordion-arrow">&#x276F;</span></div><div class="accordion-content"><p>Protege las creaciones originales en el entorno digital, como software, música, textos, imágenes y videos. Asegura que los creadores tengan derechos exclusivos sobre el uso y distribución de sus obras, fomentando la innovación y la creatividad.</p></div></div>
+                </div>
+            </div>
+
+            <div id="beneficios-peligros-derechos" class="my-8">
+                <h2 class="text-3xl section-title text-center mb-6">DOMINARLOS TE BENEFICIA ✅ VS. IGNORARLOS TE PONE EN RIESGO ⚠️</h2>
+                <div class="tab-buttons mb-0 flex justify-center md:justify-start">
+                    <button class="tab-button active" onclick="openTab(event, 'beneficios-derechos', 'beneficios-peligros-derechos')">BENEFICIOS</button>
+                    <button class="tab-button" onclick="openTab(event, 'peligros-derechos', 'beneficios-peligros-derechos')">PELIGROS</button>
+                </div>
+                <div id="beneficios-derechos" class="tab-content active card p-6 benefit-card-tab no-hover-effect"><h3 class="text-2xl font-semibold text-green-700 mb-4">BENEFICIOS (¡Al Dominarlos!)</h3><ul class="list-disc list-inside space-y-3 text-gray-700"><li><span class="icon-placeholder text-green-600">🛡️</span><strong>Mayor Protección:</strong> Salvaguarda tu privacidad, datos personales e identidad digital contra abusos y ciberataques.</li><li><span class="icon-placeholder text-green-600">🗣️</span><strong>Voz Segura y Responsable:</strong> Ejerce tu libertad de expresión online de manera informada, conociendo tus derechos y responsabilidades.</li><li><span class="icon-placeholder text-green-600">⚖️</span><strong>Justicia Digital:</strong> Conoce los mecanismos para actuar y defenderte ante violaciones de tus derechos en el entorno virtual.</li><li><span class="icon-placeholder text-green-600">🌐</span><strong>Participación Plena e Informada:</strong> Accede equitativamente a información, educación, cultura y oportunidades de desarrollo que ofrece el mundo digital.</li><li><span class="icon-placeholder text-green-600">🤖</span><strong>Control y Transparencia ante la IA:</strong> Comprende el impacto de la Inteligencia Artificial y exige que los sistemas algorítmicos sean éticos, justos y transparentes.</li><li><span class="icon-placeholder text-green-600">💡</span><strong>Empoderamiento Digital:</strong> Toma decisiones conscientes y seguras sobre tu vida digital, gestionando activamente tu huella e identidad online.</li></ul></div>
+                <div id="peligros-derechos" class="tab-content card p-6 danger-card-tab no-hover-effect"><h3 class="text-2xl font-semibold text-red-700 mb-4">PELIGROS (¡Al No Dominarlos!)</h3><ul class="list-disc list-inside space-y-3 text-gray-700"><li><span class="icon-placeholder text-red-600"></span><strong>Vulnerabilidad Extrema:</strong> Exposición a fraudes, robo de identidad, ciberacoso, extorsión, y violaciones de privacidad.</li><li><span class="icon-placeholder text-red-600">🔇</span><strong>Autocensura y Limitación:</strong> Miedo a expresarte o participar por desconocer tus derechos, o ser víctima de censura ilegítima.</li><li><span class="icon-placeholder text-red-600">🤕</span><strong>Impunidad y Desprotección:</strong> Desconocimiento sobre cómo denunciar abusos, defenderte de injusticias o buscar reparación por daños sufridos online.</li><li><span class="icon-placeholder text-red-600">📉</span><strong>Desigualdad y Exclusión Digital:</strong> Dificultad para acceder a servicios esenciales, oportunidades laborales o educativas, ampliando la brecha digital.</li><li><span class="icon-placeholder text-red-600">🤖</span><strong>Manipulación y Discriminación por IA:</strong> Ser afectado negativamente por decisiones de sistemas de IA sesgados o no transparentes sin tu conocimiento o capacidad de respuesta.</li><li><span class="icon-placeholder text-red-600">😵</span><strong>Desinformación y Engaño:</strong> Mayor riesgo de creer, difundir noticias falsas (fake news) y ser manipulado, afectando tus decisiones y percepción de la realidad.</li></ul></div>
+            </div>
+
+            <div class="card p-6 md:p-8">
+                <h2 class="text-3xl section-title flex items-center">
+                    <span class="icon-placeholder">🚀</span>¡PONLOS EN PRÁCTICA! RECOMENDACIONES CLAVE
+                </h2>
+                <div id="recomendaciones-accordion-derechos" class="space-y-2">
+                     <div class="accordion-item"><div class="accordion-header"><h4 class="text-xl font-semibold text-red-700"><span class="icon-placeholder">🎓</span>INFÓRMATE Y APRENDE CONTINUAMENTE</h4><span class="accordion-arrow">&#x276F;</span></div><div class="accordion-content"><ul class="list-disc list-inside ml-4 space-y-1"><li>Investiga sobre leyes de protección de datos (Ley Olimpia, RGPD) y cómo te afectan.</li><li>Participa en talleres, cursos y webinars sobre seguridad digital y derechos humanos en línea.</li><li>Mantente actualizado sobre nuevas tecnologías y sus implicaciones éticas y legales.</li></ul></div></div>
+                     <div class="accordion-item"><div class="accordion-header"><h4 class="text-xl font-semibold text-red-700"><span class="icon-placeholder">🛡️</span>PROTEGE TU INFORMACIÓN Y DISPOSITIVOS</h4><span class="accordion-arrow">&#x276F;</span></div><div class="accordion-content"><ul class="list-disc list-inside ml-4 space-y-1"><li>Utiliza contraseñas fuertes, únicas para cada servicio, y considera un gestor de contraseñas.</li><li>Activa la autenticación de dos factores (2FA) siempre que sea posible.</li><li>Revisa y ajusta la configuración de privacidad en tus redes sociales, apps y dispositivos.</li><li>Ten cuidado con redes Wi-Fi públicas; usa una VPN para mayor seguridad.</li><li>Mantén tu software (sistema operativo, navegador, antivirus) actualizado.</li></ul></div></div>
+                     <div class="accordion-item"><div class="accordion-header"><h4 class="text-xl font-semibold text-red-700"><span class="icon-placeholder">🧐</span>SÉ CRÍTICO, RESPONSABLE Y VERIFICA</h4><span class="accordion-arrow">&#x276F;</span></div><div class="accordion-content"><ul class="list-disc list-inside ml-4 space-y-1"><li>Piensa antes de publicar, compartir o comentar. Considera el impacto de tus palabras.</li><li>Verifica la información antes de creerla o difundirla. Contrasta fuentes y busca sellos de verificación.</li><li>No difundas contenido íntimo o privado de otras personas sin su consentimiento explícito.</li><li>Aprende a identificar noticias falsas, desinformación y discursos de odio.</li></ul></div></div>
+                     <div class="accordion-item"><div class="accordion-header"><h4 class="text-xl font-semibold text-red-700"><span class="icon-placeholder">🗣️</span>EJERCE TU VOZ CON RESPETO Y EMPATÍA</h4><span class="accordion-arrow">&#x276F;</span></div><div class="accordion-content"><ul class="list-disc list-inside ml-4 space-y-1"><li>Opina y participa en debates online, pero siempre desde el respeto y la argumentación constructiva.</li><li>Denuncia el discurso de odio, el acoso y la discriminación cuando los presencies.</li><li>Promueve un entorno digital inclusivo y seguro para todos.</li></ul></div></div>
+                     <div class="accordion-item"><div class="accordion-header"><h4 class="text-xl font-semibold text-red-700"><span class="icon-placeholder">🤝</span>PARTICIPA, DEFIENDE Y EXIGE TRANSPARENCIA</h4><span class="accordion-arrow">&#x276F;</span></div><div class="accordion-content"><ul class="list-disc list-inside ml-4 space-y-1"><li>Apoya a organizaciones y movimientos que defienden los derechos digitales.</li><li>Exige transparencia a empresas y gobiernos sobre cómo usan tus datos y desarrollan la IA.</li><li>Participa en consultas públicas y procesos legislativos relacionados con la tecnología.</li></ul></div></div>
+                     <div class="accordion-item"><div class="accordion-header"><h4 class="text-xl font-semibold text-red-700"><span class="icon-placeholder">🗑️</span>CONOCE Y UTILIZA TU DERECHO AL OLVIDO</h4><span class="accordion-arrow">&#x276F;</span></div><div class="accordion-content"><ul class="list-disc list-inside ml-4 space-y-1"><li>Si consideras que hay información tuya online que es incorrecta, obsoleta o perjudicial, investiga cómo solicitar su rectificación o eliminación.</li><li>Recuerda que este derecho tiene limitaciones y se pondera con otros derechos como la libertad de información.</li></ul></div></div>
+                </div>
+            </div>
+            <div class="cta-section">
+                <h2 class="text-3xl font-bold mb-4">¡Tus derechos digitales son tu poder en la red!</h2>
+                <p class="text-xl mb-6">Conócelos, ejércelos y ayuda a construir un entorno digital más seguro y justo para todos.</p>
+                <p class="text-2xl font-semibold">#DigitalmenteConscientesUPAEP</p>
+            </div>
+        </div>
+
+        <div id="page-alfin" class="page-section hidden-section">
+             <div class="card p-6 md:p-8">
+                <h2 class="text-3xl section-title flex items-center">
+                    <span class="icon-placeholder">🧠</span>¿QUÉ ES LA ALFABETIZACIÓN INFORMACIONAL?
+                </h2>
+                <p class="text-lg mb-6">
+                    Es la capacidad fundamental para identificar cuándo necesitas información, y luego saber cómo localizarla, evaluarla críticamente, organizarla, utilizarla de manera efectiva y comunicarla éticamente para resolver problemas, tomar decisiones y generar nuevo conocimiento, especialmente en los complejos entornos digitales de hoy.
+                </p>
+                <div id="aspectos-clave-accordion-alfin" class="space-y-2">
+                    <div class="accordion-item"><div class="accordion-header"><h3 class="text-xl font-semibold text-red-700"><span class="icon-placeholder">🔍</span>Identificar Fuentes Fidedignas</h3><span class="accordion-arrow">&#x276F;</span></div><div class="accordion-content"><p>Implica desarrollar el criterio para evaluar la credibilidad y confiabilidad de la información. Esto se logra analizando quién es el autor o la organización detrás de la fuente, cuál es su autoridad o pericia en el tema, la fecha de publicación o actualización de la información, y si presenta referencias o evidencias que respalden sus afirmaciones. Es crucial distinguir entre opiniones y hechos.</p></div></div>
+                    <div class="accordion-item"><div class="accordion-header"><h3 class="text-xl font-semibold text-red-700"><span class="icon-placeholder">📚</span>Manejar Información Abundante</h3><span class="accordion-arrow">&#x276F;</span></div><div class="accordion-content"><p>Ante la sobrecarga informativa actual (infoxicación), es vital saber aplicar técnicas de búsqueda avanzada, síntesis, análisis crítico y filtrado para seleccionar los datos verdaderamente relevantes y pertinentes para una necesidad específica. Esto incluye organizar la información de manera lógica para su posterior uso.</p></div></div>
+                    <div class="accordion-item"><div class="accordion-header"><h3 class="text-xl font-semibold text-red-700"><span class="icon-placeholder">🚫</span>Identificar Noticias Falsas (Desinformación)</h3><span class="accordion-arrow">&#x276F;</span></div><div class="accordion-content"><p>Capacidad para reconocer y combatir la desinformación (información falsa creada con intención de engañar) y la misinformación (información falsa compartida sin intención de dañar). Esto se logra mediante la verificación cruzada de datos con múltiples fuentes, el análisis del lenguaje utilizado (sensacionalista, emocional), y el uso de herramientas de fact-checking (ej. Verificado en México, Chequeado, PolitiFact).</p></div></div>
+                    <div class="accordion-item"><div class="accordion-header"><h3 class="text-xl font-semibold text-red-700"><span class="icon-placeholder">🛠️</span>Usar Herramientas para Gestionar Información</h3><span class="accordion-arrow">&#x276F;</span></div><div class="accordion-content"><p>Aprovechar aplicaciones y software que facilitan la organización, almacenamiento y recuperación de información. Ejemplos incluyen gestores de referencias bibliográficas como Zotero o Mendeley (esenciales en el ámbito académico), herramientas para tomar y organizar notas como Evernote o Notion, y agregadores de contenido o marcadores sociales como Pocket para guardar artículos y leerlos después.</p></div></div>
+                    <div class="accordion-item"><div class="accordion-header"><h3 class="text-xl font-semibold text-red-700"><span class="icon-placeholder">💡</span>Crear y Comunicar Contenido Innovador</h3><span class="accordion-arrow">&#x276F;</span></div><div class="accordion-content"><p>No solo se trata de consumir información, sino también de producirla y comunicarla de manera efectiva, ética y creativa. Esto puede implicar el uso de narrativas transmedia, la visualización de datos para hacer la información más comprensible, la creación de contenido interactivo, o la adaptación de mensajes a diferentes formatos y audiencias, siempre respetando los derechos de autor y la propiedad intelectual.</p></div></div>
+                </div>
+            </div>
+
+            <div id="beneficios-peligros-alfin" class="my-8">
+                <h2 class="text-3xl section-title text-center mb-6">DOMINAR ALFIN TE BENEFICIA ✅ VS. IGNORARLA TE PONE EN RIESGO ⚠️</h2>
+                <div class="tab-buttons mb-0 flex justify-center md:justify-start">
+                    <button class="tab-button active" onclick="openTab(event, 'beneficios-alfin', 'beneficios-peligros-alfin')">BENEFICIOS</button>
+                    <button class="tab-button" onclick="openTab(event, 'peligros-alfin', 'beneficios-peligros-alfin')">PELIGROS</button>
+                </div>
+                <div id="beneficios-alfin" class="tab-content active card p-6 benefit-card-tab no-hover-effect"><h3 class="text-2xl font-semibold text-green-700 mb-4">BENEFICIOS DE DOMINAR ALFIN</h3><ul class="list-disc list-inside space-y-3 text-gray-700"><li><span class="icon-placeholder text-green-600">🧐</span><strong>Pensamiento Crítico Mejorado:</strong> Desarrolla la habilidad para analizar, cuestionar y evaluar la información de manera objetiva y profunda.</li><li><span class="icon-placeholder text-green-600">🎯</span><strong>Toma de Decisiones Informada:</strong> Permite basar elecciones personales, académicas y profesionales en información precisa, relevante y verificada.</li><li><span class="icon-placeholder text-green-600">💡</span><strong>Generación de Conocimiento:</strong> Facilita no solo consumir, sino también crear, adaptar y compartir información valiosa de forma innovadora y ética.</li><li><span class="icon-placeholder text-green-600">🧩</span><strong>Resolución Efectiva de Problemas:</strong> Proporciona las herramientas para encontrar y aplicar la información necesaria para solucionar problemas complejos.</li><li><span class="icon-placeholder text-green-600">📈</span><strong>Aprendizaje Autónomo y Continuo:</strong> Esencial para el aprendizaje a lo largo de la vida en un mundo donde la información y las tecnologías cambian constantemente.</li><li><span class="icon-placeholder text-green-600">🏆</span><strong>Éxito Académico y Profesional:</strong> Fundamental para la investigación, la producción de trabajos de calidad y la comunicación efectiva.</li></ul></div>
+                <div id="peligros-alfin" class="tab-content card p-6 danger-card-tab no-hover-effect"><h3 class="text-2xl font-semibold text-red-700 mb-4">PELIGROS DE NO DOMINAR ALFIN</h3><ul class="list-disc list-inside space-y-3 text-gray-700"><li><span class="icon-placeholder text-red-600">🌊</span><strong>Vulnerabilidad a la Desinformación:</strong> Dificultad para distinguir entre información veraz y falsa, llevando a creencias erróneas y decisiones perjudiciales.</li><li><span class="icon-placeholder text-red-600">🤯</span><strong>Sobrecarga Informativa (Infoxicación):</strong> Sentimiento de agobio y dificultad para procesar la gran cantidad de información, llevando a la parálisis o al rechazo.</li><li><span class="icon-placeholder text-red-600">📉</span><strong>Toma de Decisiones Deficiente:</strong> Basar elecciones importantes en información incompleta, sesgada, manipulada o incorrecta.</li><li><span class="icon-placeholder text-red-600">👎</span><strong>Bajo Rendimiento Académico/Profesional:</strong> Dificultades para investigar, argumentar, redactar y mantenerse actualizado.</li><li><span class="icon-placeholder text-red-600">📢</span><strong>Propagación Involuntaria de Falsedades:</strong> Contribuir, sin saberlo, a la difusión de bulos y desinformación, afectando a otros.</li><li><span class="icon-placeholder text-red-600">🎣</span><strong>Manipulación y Engaño:</strong> Ser más susceptible a la persuasión basada en datos incorrectos, presentados de manera engañosa o con intenciones ocultas.</li></ul></div>
+            </div>
+
+             <div class="card p-6 md:p-8">
+                <h2 class="text-3xl section-title flex items-center">
+                    <span class="icon-placeholder">🚀</span>¡PON ALFIN EN PRÁCTICA! RECOMENDACIONES
+                </h2>
+                <div id="recomendaciones-accordion-alfin" class="space-y-2">
+                     <div class="accordion-item"><div class="accordion-header"><h4 class="text-xl font-semibold text-red-700"><span class="icon-placeholder">🛡️</span>Capacítate en Verificación (Fact-Checking)</h4><span class="accordion-arrow">&#x276F;</span></div><div class="accordion-content"><ul class="list-disc list-inside ml-4 space-y-1"><li>Aprende y utiliza técnicas de verificación de hechos.</li><li>Familiarízate con plataformas de fact-checking como Verificado (México), Chequeado, PolitiFact, Snopes, y las secciones de verificación de medios confiables.</li><li>Practica la búsqueda inversa de imágenes para comprobar su origen y contexto.</li></ul></div></div>
+                     <div class="accordion-item"><div class="accordion-header"><h4 class="text-xl font-semibold text-red-700"><span class="icon-placeholder">🤔</span>Desarrolla el Pensamiento Crítico</h4><span class="accordion-arrow">&#x276F;</span></div><div class="accordion-content"><ul class="list-disc list-inside ml-4 space-y-1"><li>Cuestiona siempre la fuente: ¿Quién lo dice? ¿Cuál es su intención? ¿Tiene algún sesgo?</li><li>Busca la evidencia detrás de las afirmaciones. No aceptes nada a ciegas.</li><li>Compara información de múltiples fuentes y perspectivas antes de formar una opinión.</li><li>Distingue entre hechos, opiniones e inferencias.</li></ul></div></div>
+                    <div class="accordion-item"><div class="accordion-header"><h4 class="text-xl font-semibold text-red-700"><span class="icon-placeholder">📲</span>Adopta Herramientas Digitales de Gestión</h4><span class="accordion-arrow">&#x276F;</span></div><div class="accordion-content"><ul class="list-disc list-inside ml-4 space-y-1"><li>Utiliza gestores de referencias (Zotero, Mendeley) para organizar tus fuentes académicas y citar correctamente.</li><li>Prueba apps de toma de notas y organización (Evernote, Notion, OneNote) para estructurar tus ideas e investigaciones.</li><li>Explora herramientas de curación de contenido (Pocket, Feedly) para seguir temas de tu interés de fuentes variadas.</li></ul></div></div>
+                    <div class="accordion-item"><div class="accordion-header"><h4 class="text-xl font-semibold text-red-700"><span class="icon-placeholder">🔎</span>Practica la Búsqueda Efectiva y Ética</h4><span class="accordion-arrow">&#x276F;</span></div><div class="accordion-content"><ul class="list-disc list-inside ml-4 space-y-1"><li>Aprende a usar operadores booleanos (AND, OR, NOT) y otros filtros en motores de búsqueda para refinar tus resultados.</li><li>Utiliza bases de datos académicas y bibliotecas digitales para acceder a información especializada y revisada por pares.</li><li>Respeta los derechos de autor y la propiedad intelectual al usar y compartir información. Cita tus fuentes siempre.</li></ul></div></div>
+                    <div class="accordion-item"><div class="accordion-header"><h4 class="text-xl font-semibold text-red-700"><span class="icon-placeholder">✍️</span>Crea y Comparte Contenido de Forma Crítica</h4><span class="accordion-arrow">&#x276F;</span></div><div class="accordion-content"><ul class="list-disc list-inside ml-4 space-y-1"><li>Al crear contenido, asegúrate de que tu información sea precisa, esté bien fundamentada y cite las fuentes originales.</li><li>Considera el impacto de tu mensaje y tu audiencia. Comunica de manera clara y responsable.</li><li>Experimenta con diferentes formatos (infografías, videos cortos, podcasts, blogs) para comunicar ideas de forma innovadora.</li></ul></div></div>
+                    <div class="accordion-item"><div class="accordion-header"><h4 class="text-xl font-semibold text-red-700"><span class="icon-placeholder">📖</span>Fomenta la Lectura Diversa y Constante</h4><span class="accordion-arrow">&#x276F;</span></div><div class="accordion-content"><ul class="list-disc list-inside ml-4 space-y-1"><li>Lee sobre una amplia gama de temas y desde diferentes perspectivas para expandir tu conocimiento y comprensión del mundo.</li><li>Consume información de diversos tipos de fuentes (académicas, periodísticas, institucionales, etc.) y formatos.</li><li>La lectura regular mejora tu vocabulario, comprensión y capacidad de evaluación crítica.</li></ul></div></div>
+                </div>
+            </div>
+            <div class="cta-section">
+                <h2 class="text-3xl font-bold mb-4">¡Conviértete en un experto de la información!</h2>
+                <p class="text-xl mb-6">La Alfabetización Informacional te empodera para navegar el mundo digital con confianza y criterio.</p>
+                <p class="text-2xl font-semibold">#ALFINparaTodos #InfoInteligenteUPAEP</p>
+            </div>
+        </div>
+
+        <div id="page-juegos" class="page-section hidden-section">
+            <div class="card p-6 md:p-8">
+                <h2 class="text-3xl section-title flex items-center">
+                    <span class="icon-placeholder">🎮</span>Juegos Educativos
+                </h2>
+                <p class="text-lg mb-6 text-center">
+                    ¡Pon a prueba tus conocimientos y diviértete aprendiendo sobre competencias digitales!
+                </p>
+                <div class="game-card">
+                    <h3>Memorama ALFIN</h3>
+                    <p>Encuentra los pares de conceptos clave sobre Alfabetización Informacional.</p>
+                    <a href="memorama_alfin.html" target="_blank" class="menu-nav-button">
+                        <span class="icon">🧠</span> Jugar Memorama
+                    </a>
+                    <p class="text-sm mt-4 text-gray-600">(El juego se abrirá en una nueva pestaña)</p>
+                </div>
+                </div>
+        </div>
+
+    </main>
+
+    <footer class="main-footer">
+        <p>Realizado en parejas por: [Nombres de Alumnos]</p>
+        <p>Asesoría: [Nombres de Asesores]</p>
+        <p>Basado en la investigación: "Alfabetización digital y derechos digitales" - UPAEP</p>
+        <p>&copy; <span id="currentYearSPA"></span> UPAEP. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        // --- Lógica de Navegación SPA ---
+        const pageSectionsSPA = document.querySelectorAll('.page-section');
+        const navButtonsSPA = document.querySelectorAll('.main-navigation button');
+
+        function showPage(pageIdToShow) {
+            pageSectionsSPA.forEach(section => {
+                section.classList.add('hidden-section');
+            });
+            const sectionToShow = document.getElementById(pageIdToShow);
+            if (sectionToShow) {
+                sectionToShow.classList.remove('hidden-section');
+            }
+            navButtonsSPA.forEach(button => {
+                button.classList.remove('active-nav');
+                if (button.id === `nav-${pageIdToShow.split('-')[1]}`) { // ej. nav-menu, nav-derechos, nav-alfin, nav-juegos
+                    button.classList.add('active-nav');
+                }
+            });
+
+            if (pageIdToShow === 'page-derechos') {
+                initializePageInteractivity('aspectos-clave-accordion-derechos', 'recomendaciones-accordion-derechos', 'beneficios-peligros-derechos', 'beneficios-derechos');
+            } else if (pageIdToShow === 'page-alfin') {
+                initializePageInteractivity('aspectos-clave-accordion-alfin', 'recomendaciones-accordion-alfin', 'beneficios-peligros-alfin', 'beneficios-alfin');
+            }
+            // No se necesita inicialización especial para page-juegos si solo contiene enlaces
+            window.scrollTo(0, 0);
+        }
+
+        function initializePageInteractivity(aspectsAccordionId, recAccordionId, tabsContainerId, defaultTabId) {
+            setupAccordion(aspectsAccordionId);
+            setupAccordion(recAccordionId);
+
+            const tabButtonsGroup = document.getElementById(tabsContainerId)?.querySelector('.tab-buttons');
+            if (tabButtonsGroup) {
+                const firstTabButton = tabButtonsGroup.querySelector(`button[onclick*="'${defaultTabId}'"]`) || tabButtonsGroup.querySelector('button');
+                if (firstTabButton) {
+                    const isActiveTabPresent = !!tabButtonsGroup.querySelector('button.active');
+                    const defaultTabContent = document.getElementById(defaultTabId);
+                    if (!isActiveTabPresent || (defaultTabContent && !defaultTabContent.classList.contains('active'))) {
+                         openTab({ currentTarget: firstTabButton }, defaultTabId, tabsContainerId);
+                    }
+                }
+            }
+        }
+        
+        function setupAccordion(accordionId) {
+            const accordion = document.getElementById(accordionId);
+            if (!accordion || accordion.dataset.accordionInitialized === 'true') return;
+
+            const items = accordion.querySelectorAll('.accordion-item');
+            items.forEach(item => {
+                const header = item.querySelector('.accordion-header');
+                const content = item.querySelector('.accordion-content');
+                if (!header || !content) return;
+
+                const newHeader = header.cloneNode(true);
+                header.parentNode.replaceChild(newHeader, header);
+                
+                newHeader.addEventListener('click', function() {
+                    const parentAccordion = this.closest('.space-y-2');
+                    parentAccordion.querySelectorAll('.accordion-item').forEach(otherItem => {
+                        const otherHeader = otherItem.querySelector('.accordion-header');
+                        const otherContent = otherItem.querySelector('.accordion-content');
+                        const otherArrow = otherHeader ? otherHeader.querySelector('.accordion-arrow') : null;
+                        
+                        if (otherItem.contains(this)) return;
+
+                        if (otherContent && otherContent.classList.contains('active')) {
+                            otherContent.classList.remove('active');
+                            if(otherHeader) otherHeader.classList.remove('active');
+                            if (otherArrow) otherArrow.style.transform = 'rotate(0deg)';
+                        }
+                    });
+                    const isActive = content.classList.toggle('active');
+                    this.classList.toggle('active');
+                    const currentArrow = this.querySelector('.accordion-arrow');
+                    if (currentArrow) currentArrow.style.transform = isActive ? 'rotate(90deg)' : 'rotate(0deg)';
+                });
+            });
+            accordion.dataset.accordionInitialized = 'true';
+        }
+
+        function openTab(event, tabIdToShow, tabContainerId) {
+            const tabContainer = document.getElementById(tabContainerId);
+            if (!tabContainer) { console.error("Tab container not found:", tabContainerId); return; }
+
+            const tabContents = tabContainer.querySelectorAll(".tab-content");
+            tabContents.forEach(content => {
+                content.style.display = "none";
+                content.classList.remove("active");
+            });
+            
+            let tabButtonsGroup = tabContainer.querySelector('.tab-buttons');
+            if (!tabButtonsGroup) {
+                 let parentOfTabs = tabContainer.parentElement;
+                 if(parentOfTabs) tabButtonsGroup = parentOfTabs.querySelector('.tab-buttons');
+            }
+            if(!tabButtonsGroup && document.getElementById(tabContainerId).previousElementSibling && document.getElementById(tabContainerId).previousElementSibling.classList.contains('tab-buttons')){
+                 tabButtonsGroup = document.getElementById(tabContainerId).previousElementSibling;
+            }
+
+            if (!tabButtonsGroup) { console.error("Tab buttons group not found for:", tabContainerId); return; }
+            const tabButtons = tabButtonsGroup.querySelectorAll(".tab-button");
+
+            tabButtons.forEach(button => { button.classList.remove("active"); });
+
+            const tabToShow = document.getElementById(tabIdToShow);
+            if (tabToShow) {
+                tabToShow.style.display = "block";
+                tabToShow.classList.add("active");
+            } else { console.error("Tab content to show not found:", tabIdToShow); }
+
+            if (event && event.currentTarget) {
+                event.currentTarget.classList.add("active");
+            } else {
+                tabButtons.forEach(button => {
+                    const onclickAttr = button.getAttribute('onclick');
+                    if (onclickAttr && onclickAttr.includes(`'${tabIdToShow}'`)) {
+                        button.classList.add('active');
+                    }
+                });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            showPage('page-menu');
+            setupAccordion('aspectos-clave-accordion-derechos');
+            setupAccordion('recomendaciones-accordion-derechos');
+            setupAccordion('aspectos-clave-accordion-alfin');
+            setupAccordion('recomendaciones-accordion-alfin');
+            document.getElementById('currentYearSPA').textContent = new Date().getFullYear();
+        });
+    </script>
+
+</body>
+</html>
