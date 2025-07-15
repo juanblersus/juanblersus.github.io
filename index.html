@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BINAC - Apoyo a Emprendedores</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .page-view {
+            display: none; /* Ocultar vistas de página por defecto */
+        }
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Header Section -->
+    <header class="bg-blue-700 shadow-lg text-white">
+        <div class="container mx-auto px-6 py-4">
+            <h1 class="text-3xl font-bold">BINAC</h1>
+            <p class="text-lg text-blue-200 mt-1">Tu Aliado en el Camino del Emprendimiento</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 sm:px-6 py-8">
+
+        <!-- Vista Principal (Home) -->
+        <div id="home-view">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-extrabold text-gray-900 mb-4">Transforma tu Idea en un Negocio Exitoso</h2>
+                <p class="max-w-3xl mx-auto text-xl text-gray-600 text-justify">
+                    Ofrecemos una plataforma integral con herramientas, capacitación y asesoría para acompañarte en cada etapa de tu proyecto.
+                </p>
+            </div>
+
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-extrabold text-gray-900 mb-4">Conoce BINAC</h2>
+                <p class="max-w-3xl mx-auto text-xl text-gray-600 text-justify">
+                    BINAC es un espacio dedicado a emprendedores como tú, que buscan apoyo y orientación para desarrollar sus negocios. Te proporcionamos herramientas prácticas, contenido actualizado y asesoría especializada para que lleves tu proyecto al siguiente nivel. Nuestra misión es acompañarte en cada etapa de tu camino, desde la concepción de la idea hasta la consolidación de tu empresa.
+                </p>
+            </div>
+            
+            <!-- Sección de Mosaicos -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Card: Monitor de Negocio -->
+                <div class="card bg-blue-600 text-white rounded-lg shadow-md p-6 text-center cursor-pointer" data-target="monitor-view">
+                    <div class="text-4xl mb-4">📊</div>
+                    <h3 class="text-2xl font-bold mb-2">Monitor de Negocio</h3>
+                    <p>Registra ingresos, gastos y mide la rentabilidad de tu negocio.</p>
+                </div>
+                <!-- Card: Modelo de Negocio -->
+                <div class="card bg-white rounded-lg shadow-md p-6 text-center cursor-pointer" data-target="modelo-view">
+                    <div class="text-4xl mb-4">🎨</div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">Modelo de Negocio</h3>
+                    <p class="text-gray-600">Aprende a estructurar, validar y presentar tu idea de negocio.</p>
+                </div>
+                <!-- Card: Finanzas -->
+                <div class="card bg-white rounded-lg shadow-md p-6 text-center cursor-pointer" data-target="finanzas-view">
+                    <div class="text-4xl mb-4">💰</div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">Finanzas</h3>
+                    <p class="text-gray-600">Calcula costos, define precios y maneja la contabilidad.</p>
+                </div>
+                <!-- Card: Marketing y Ventas -->
+                <div class="card bg-white rounded-lg shadow-md p-6 text-center cursor-pointer" data-target="marketing-view">
+                    <div class="text-4xl mb-4">📈</div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">Marketing y Ventas</h3>
+                    <p class="text-gray-600">Promociona tu marca, crea tu logo y vende en redes sociales.</p>
+                </div>
+                <!-- Card: Aspectos Legales -->
+                <div class="card bg-white rounded-lg shadow-md p-6 text-center cursor-pointer" data-target="legales-view">
+                    <div class="text-4xl mb-4">⚖️</div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">Aspectos Legales</h3>
+                    <p class="text-gray-600">Registra tu marca, conoce los impuestos y formaliza tu negocio.</p>
+                </div>
+                <!-- Card: Mentalidad Empresarial -->
+                <div class="card bg-white rounded-lg shadow-md p-6 text-center cursor-pointer" data-target="mentalidad-view">
+                    <div class="text-4xl mb-4">🧠</div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">Mentalidad Empresarial</h3>
+                    <p class="text-gray-600">Desarrolla resiliencia y una mentalidad de crecimiento.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vistas de Página de Detalle -->
+
+        <!-- Vista: Monitor de Negocio -->
+        <div id="monitor-view" class="page-view">
+            <button class="back-button mb-8 bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 transition-colors">← Volver</button>
+            <h2 class="text-4xl font-extrabold text-gray-900 mb-8 text-center">📊 Monitor de Negocio</h2>
+            
+            <!-- Resumen Financiero -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 max-w-5xl mx-auto">
+                <div class="bg-green-100 p-4 rounded-lg shadow text-center">
+                    <h4 class="text-lg font-semibold text-green-800">Total Ingresos</h4>
+                    <p id="total-ingresos" class="text-2xl font-bold text-green-600">$0.00</p>
+                </div>
+                <div class="bg-red-100 p-4 rounded-lg shadow text-center">
+                    <h4 class="text-lg font-semibold text-red-800">Total Gastos</h4>
+                    <p id="total-gastos" class="text-2xl font-bold text-red-600">$0.00</p>
+                </div>
+                <div class="bg-blue-100 p-4 rounded-lg shadow text-center">
+                    <h4 class="text-lg font-semibold text-blue-800">Balance</h4>
+                    <p id="balance" class="text-2xl font-bold text-blue-600">$0.00</p>
+                </div>
+            </div>
+             <div class="bg-indigo-100 p-4 rounded-lg shadow text-center max-w-sm mx-auto mb-8">
+                <h4 class="text-lg font-semibold text-indigo-800">Rentabilidad</h4>
+                <p id="rentabilidad" class="text-2xl font-bold text-indigo-600">0%</p>
+            </div>
+
+            <!-- Formulario y Lista -->
+            <div class="flex flex-col lg:flex-row gap-8 max-w-6xl mx-auto">
+                <!-- Formulario de Transacción -->
+                <div class="lg:w-1/3 bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-2xl font-bold mb-4">Nueva Transacción</h3>
+                    <form id="transaction-form">
+                        <div class="mb-4">
+                            <label for="description" class="block text-gray-700 font-semibold mb-2">Descripción</label>
+                            <input type="text" id="description" placeholder="Ej: Venta de producto" class="w-full p-2 border border-gray-300 rounded" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="amount" class="block text-gray-700 font-semibold mb-2">Monto</label>
+                            <input type="number" id="amount" placeholder="250.00" class="w-full p-2 border border-gray-300 rounded" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="type" class="block text-gray-700 font-semibold mb-2">Tipo</label>
+                            <select id="type" class="w-full p-2 border border-gray-300 rounded">
+                                <option value="ingreso">Ingreso</option>
+                                <option value="gasto">Gasto</option>
+                            </select>
+                        </div>
+                        <div class="mb-4">
+                            <label for="date" class="block text-gray-700 font-semibold mb-2">Fecha</label>
+                            <input type="date" id="date" class="w-full p-2 border border-gray-300 rounded" required>
+                        </div>
+                        <button type="submit" class="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 transition-colors">Agregar Transacción</button>
+                    </form>
+                </div>
+                <!-- Lista de Transacciones -->
+                <div class="lg:w-2/3 bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-2xl font-bold mb-4">Historial de Transacciones</h3>
+                    <ul id="transaction-list" class="space-y-3">
+                        <!-- Las transacciones se insertarán aquí -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- OTRAS VISTAS (Modelo, Finanzas, etc.) -->
+        <div id="modelo-view" class="page-view">
+            <button class="back-button mb-8 bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 transition-colors">← Volver</button>
+            <h2 class="text-4xl font-extrabold text-gray-900 mb-8 text-center">🎨 Modelo de Negocio</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                <div class="bg-white p-4 rounded-lg shadow-lg"><h3 class="text-xl font-bold mb-3">Modelo Canvas</h3><div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-md mb-4"><iframe src="https://www.youtube.com/embed/92h94skG_hY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><p class="text-gray-600">Una herramienta visual para diseñar, describir y analizar tu modelo de negocio de forma sencilla.</p></div>
+                <div class="bg-white p-4 rounded-lg shadow-lg"><h3 class="text-xl font-bold mb-3">Plan de Negocios</h3><div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-md mb-4"><iframe src="https://www.youtube.com/embed/NjFCVb0f2Vk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><p class="text-gray-600">Aprende a crear un plan de negocios paso a paso, un documento esencial para buscar financiamiento y guiar el crecimiento.</p></div>
+                <div class="bg-white p-4 rounded-lg shadow-lg"><h3 class="text-xl font-bold mb-3">7 Pasos para Iniciar un Negocio</h3><div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-md mb-4"><iframe src="https://www.youtube.com/embed/TGIp0jehZXE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><p class="text-gray-600">Descubre los 7 pasos fundamentales que todo emprendedor debe seguir para comenzar un negocio desde cero con éxito.</p></div>
+                <div class="bg-white p-4 rounded-lg shadow-lg"><h3 class="text-xl font-bold mb-3">Estudio de Mercado</h3><div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-md mb-4"><iframe src="https://www.youtube.com/embed/554Fwv7jQMI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><p class="text-gray-600">Entiende cómo realizar un estudio de mercado para validar tu idea, conocer a tu competencia y entender a tus clientes.</p></div>
+                <div class="bg-white p-4 rounded-lg shadow-lg"><h3 class="text-xl font-bold mb-3">El Pitch de Negocios Perfecto</h3><div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-md mb-4"><iframe src="https://www.youtube.com/embed/H3VblR2kLXM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><p class="text-gray-600">Domina el arte de presentar tu proyecto de manera concisa y convincente para atraer a inversionistas y socios.</p></div>
+            </div>
+        </div>
+        <div id="finanzas-view" class="page-view">
+            <button class="back-button mb-8 bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 transition-colors">← Volver</button>
+            <h2 class="text-4xl font-extrabold text-gray-900 mb-8 text-center">💰 Finanzas</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                <div class="bg-white p-4 rounded-lg shadow-lg"><h3 class="text-xl font-bold mb-3">Costos y Precios</h3><div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-md mb-4"><iframe src="https://www.youtube.com/embed/x2Kq6yMM_iM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><p class="text-gray-600">Entender los números de tu negocio es fundamental. Aprende a calcular tus costos y fijar precios de manera estratégica.</p></div>
+                <div class="bg-white p-4 rounded-lg shadow-lg"><h3 class="text-xl font-bold mb-3">Finanzas para Emprendedores</h3><div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-md mb-4"><iframe src="https://www.youtube.com/embed/_lmPfTgZw7c" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><p class="text-gray-600">Una guía completa sobre los conceptos financieros básicos que todo dueño de negocio debe conocer para tomar decisiones.</p></div>
+                <div class="bg-white p-4 rounded-lg shadow-lg"><h3 class="text-xl font-bold mb-3">Contabilidad para tu Negocio</h3><div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-md mb-4"><iframe src="https://www.youtube.com/embed/Fm_M5rej3eU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><p class="text-gray-600">Descubre cómo llevar la contabilidad de tu negocio de forma ordenada, incluso si no eres un experto en el tema.</p></div>
+            </div>
+        </div>
+        <div id="marketing-view" class="page-view">
+            <button class="back-button mb-8 bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 transition-colors">← Volver</button>
+            <h2 class="text-4xl font-extrabold text-gray-900 mb-8 text-center">📈 Marketing y Ventas</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                <div class="bg-white p-4 rounded-lg shadow-lg"><h3 class="text-xl font-bold mb-3">Promoción en Redes Sociales</h3><div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-md mb-4"><iframe src="https://www.youtube.com/embed/mP02fG2c3l8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><p class="text-gray-600">Descubre cómo utilizar las redes sociales para conectar con tu audiencia, generar clientes potenciales y aumentar tus ventas.</p></div>
+                <div class="bg-white p-4 rounded-lg shadow-lg"><h3 class="text-xl font-bold mb-3">¿Qué es el Marketing?</h3><div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-md mb-4"><iframe src="https://www.youtube.com/embed/29iU2NA0rDQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><p class="text-gray-600">Entiende los fundamentos del marketing y su importancia para comunicar el valor de tu producto o servicio al mercado.</p></div>
+                <div class="bg-white p-4 rounded-lg shadow-lg"><h3 class="text-xl font-bold mb-3">Introducción al Marketing Digital</h3><div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-md mb-4"><iframe src="https://www.youtube.com/embed/dnLd5hHhgqA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><p class="text-gray-600">Explora las herramientas y estrategias del marketing digital para hacer crecer tu negocio en el entorno online.</p></div>
+                <div class="bg-white p-4 rounded-lg shadow-lg"><h3 class="text-xl font-bold mb-3">Técnicas para Vender Más</h3><div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-md mb-4"><iframe src="https://www.youtube.com/embed/avAz56oJxpQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><p class="text-gray-600">Aprende técnicas y consejos prácticos de ventas para mejorar tu discurso, manejar objeciones y cerrar más tratos.</p></div>
+                <div class="bg-white p-4 rounded-lg shadow-lg"><h3 class="text-xl font-bold mb-3">Creación de una Marca (Branding)</h3><div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-md mb-4"><iframe src="https://www.youtube.com/embed/H370K-wa1uA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><p class="text-gray-600">Descubre cómo construir una marca sólida y memorable que conecte emocionalmente con tus clientes.</p></div>
+                <div class="bg-white p-4 rounded-lg shadow-lg"><h3 class="text-xl font-bold mb-3">Diseña tu Logo con Canva</h3><div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-md mb-4"><iframe src="https://www.youtube.com/embed/hsIowKV9bVk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><p class="text-gray-600">Aprende a utilizar Canva, una herramienta gratuita y fácil de usar, para diseñar un logo profesional para tu marca.</p></div>
+                <div class="bg-white p-4 rounded-lg shadow-lg"><h3 class="text-xl font-bold mb-3">Instagram para Negocios</h3><div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-md mb-4"><iframe src="https://www.youtube.com/embed/htkvJ3H0yxU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><p class="text-gray-600">Optimiza tu perfil de Instagram y utiliza sus herramientas para atraer clientes y potenciar tus ventas de manera efectiva.</p></div>
+            </div>
+        </div>
+        <div id="legales-view" class="page-view">
+            <button class="back-button mb-8 bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 transition-colors">← Volver</button>
+            <h2 class="text-4xl font-extrabold text-gray-900 mb-8 text-center">⚖️ Aspectos Legales</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                <div class="bg-white p-4 rounded-lg shadow-lg"><h3 class="text-xl font-bold mb-3">Figuras Legales en México</h3><div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-md mb-4"><iframe src="https://www.youtube.com/embed/8GUEF_Sj-aI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><p class="text-gray-600">Conoce las diferentes figuras legales (Persona Física, S.A.S, S.A. de C.V.) y elige la más adecuada para tu proyecto.</p></div>
+                <div class="bg-white p-4 rounded-lg shadow-lg"><h3 class="text-xl font-bold mb-3">Registro de Marca en México (IMPI)</h3><div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-md mb-4"><iframe src="https://www.youtube.com/embed/7vk5PoUUkPc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><p class="text-gray-600">Aprende el proceso paso a paso para registrar tu marca ante el IMPI y proteger legalmente tu nombre y logo.</p></div>
+                <div class="bg-white p-4 rounded-lg shadow-lg"><h3 class="text-xl font-bold mb-3">Impuestos para Empresas en México</h3><div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-md mb-4"><iframe src="https://www.youtube.com/embed/YxhxNjeUFaA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><p class="text-gray-600">Una explicación clara sobre los principales impuestos que una empresa debe considerar y pagar en México.</p></div>
+                <div class="bg-white p-4 rounded-lg shadow-lg"><h3 class="text-xl font-bold mb-3">Cómo Darse de Alta en el SAT</h3><div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-md mb-4"><iframe src="https://www.youtube.com/embed/EMcaDp144tg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><p class="text-gray-600">Guía práctica para registrar tu empresa o actividad profesional ante el Servicio de Administración Tributaria (SAT).</p></div>
+                <div class="bg-white p-4 rounded-lg shadow-lg"><h3 class="text-xl font-bold mb-3">¿Qué es el SAT?</h3><div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-md mb-4"><iframe src="https://www.youtube.com/embed/Y2YAqAGynQE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><p class="text-gray-600">Entiende qué es el SAT, cuál es su función y por qué es un paso indispensable para la formalización de tu negocio.</p></div>
+            </div>
+        </div>
+        <div id="mentalidad-view" class="page-view">
+            <button class="back-button mb-8 bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 transition-colors">← Volver</button>
+            <h2 class="text-4xl font-extrabold text-gray-900 mb-8 text-center">🧠 Mentalidad Empresarial</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                <div class="bg-white p-4 rounded-lg shadow-lg"><h3 class="text-xl font-bold mb-3">Gestión de Miedos al Emprender</h3><div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-md mb-4"><iframe src="https://www.youtube.com/embed/uQ4C3Rf_6M4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><p class="text-gray-600">Aprende a gestionar tus miedos, desarrollar resiliencia y adoptar una mentalidad de crecimiento para superar obstáculos.</p></div>
+                <div class="bg-white p-4 rounded-lg shadow-lg"><h3 class="text-xl font-bold mb-3">Mentalidad de Tiburón</h3><div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-md mb-4"><iframe src="https://www.youtube.com/embed/r-lG8hh0lV0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><p class="text-gray-600">Descubre las claves de una mentalidad enfocada en la ambición, la disciplina y la búsqueda constante de oportunidades.</p></div>
+                <div class="bg-white p-4 rounded-lg shadow-lg"><h3 class="text-xl font-bold mb-3">El Cuadrante del Flujo de Dinero</h3><div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-md mb-4"><iframe src="https://www.youtube.com/embed/8aoEK0389p0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><p class="text-gray-600">Comprende los diferentes tipos de mentalidad financiera según Robert Kiyosaki para alcanzar la libertad económica.</p></div>
+                <div class="bg-white p-4 rounded-lg shadow-lg"><h3 class="text-xl font-bold mb-3">Cómo Pensar como Emprendedor</h3><div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-md mb-4"><iframe src="https://www.youtube.com/embed/gfYyAA34cHI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><p class="text-gray-600">Desarrolla los hábitos y el enfoque mental que distinguen a los emprendedores exitosos del resto.</p></div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white mt-12">
+        <div class="container mx-auto px-6 py-4 text-center text-gray-500">
+            <p>&copy; 2024 BINAC. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // --- Lógica de Navegación ---
+            const homeView = document.getElementById('home-view');
+            const pageViews = document.querySelectorAll('.page-view');
+            const cards = document.querySelectorAll('.card');
+            const backButtons = document.querySelectorAll('.back-button');
+
+            function navigateTo(viewId) {
+                homeView.style.display = 'none';
+                pageViews.forEach(view => view.style.display = 'none');
+                const targetView = document.getElementById(viewId);
+                if (targetView) {
+                    targetView.style.display = 'block';
+                }
+                window.scrollTo(0, 0);
+            }
+
+            cards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const targetViewId = card.getAttribute('data-target');
+                    navigateTo(targetViewId);
+                });
+            });
+
+            backButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    pageViews.forEach(view => view.style.display = 'none');
+                    homeView.style.display = 'block';
+                    window.scrollTo(0, 0);
+                });
+            });
+
+            // --- Lógica del Monitor Financiero ---
+            const transactionForm = document.getElementById('transaction-form');
+            const descriptionInput = document.getElementById('description');
+            const amountInput = document.getElementById('amount');
+            const typeInput = document.getElementById('type');
+            const dateInput = document.getElementById('date');
+            const transactionList = document.getElementById('transaction-list');
+            const totalIngresosEl = document.getElementById('total-ingresos');
+            const totalGastosEl = document.getElementById('total-gastos');
+            const balanceEl = document.getElementById('balance');
+            const rentabilidadEl = document.getElementById('rentabilidad');
+
+            // Cargar transacciones desde localStorage
+            let transactions = JSON.parse(localStorage.getItem('transactions')) || [];
+
+            function formatCurrency(num) {
+                return new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(num);
+            }
+
+            function addTransaction(e) {
+                e.preventDefault();
+                if (descriptionInput.value.trim() === '' || amountInput.value.trim() === '' || dateInput.value.trim() === '') {
+                    alert('Por favor, completa todos los campos.');
+                    return;
+                }
+                const transaction = {
+                    id: Date.now(),
+                    description: descriptionInput.value,
+                    amount: +amountInput.value,
+                    type: typeInput.value,
+                    date: dateInput.value,
+                };
+                transactions.push(transaction);
+                updateLocalStorage();
+                updateUI();
+                transactionForm.reset();
+                dateInput.valueAsDate = new Date(); // Reset date to today
+            }
+
+            function deleteTransaction(id) {
+                transactions = transactions.filter(t => t.id !== id);
+                updateLocalStorage();
+                updateUI();
+            }
+
+            function updateUI() {
+                transactionList.innerHTML = '';
+                transactions.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+                if (transactions.length === 0) {
+                    transactionList.innerHTML = '<p class="text-gray-500 text-center">No hay transacciones todavía.</p>';
+                } else {
+                    transactions.forEach(t => {
+                        const sign = t.type === 'ingreso' ? '+' : '-';
+                        const item = document.createElement('li');
+                        item.classList.add('flex', 'justify-between', 'items-center', 'p-3', 'rounded-lg', t.type === 'ingreso' ? 'bg-green-50' : 'bg-red-50');
+                        item.innerHTML = `
+                            <div class="flex flex-col">
+                                <span class="font-bold">${t.description}</span>
+                                <span class="text-sm text-gray-500">${new Date(t.date).toLocaleDateString('es-ES', { timeZone: 'UTC' })}</span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <span class="font-bold ${t.type === 'ingreso' ? 'text-green-600' : 'text-red-600'}">
+                                    ${sign}${formatCurrency(t.amount)}
+                                </span>
+                                <button onclick="deleteTransaction(${t.id})" class="text-red-500 hover:text-red-700 font-bold">X</button>
+                            </div>
+                        `;
+                        transactionList.appendChild(item);
+                    });
+                }
+                updateSummary();
+            }
+
+            function updateSummary() {
+                const ingresos = transactions.filter(t => t.type === 'ingreso').reduce((acc, t) => acc + t.amount, 0);
+                const gastos = transactions.filter(t => t.type === 'gasto').reduce((acc, t) => acc + t.amount, 0);
+                const balance = ingresos - gastos;
+                const rentabilidad = ingresos > 0 ? ((balance / ingresos) * 100).toFixed(2) : 0;
+
+                totalIngresosEl.textContent = formatCurrency(ingresos);
+                totalGastosEl.textContent = formatCurrency(gastos);
+                balanceEl.textContent = formatCurrency(balance);
+                rentabilidadEl.textContent = `${rentabilidad}%`;
+
+                balanceEl.classList.toggle('text-red-600', balance < 0);
+                balanceEl.classList.toggle('text-blue-600', balance >= 0);
+            }
+
+            function updateLocalStorage() {
+                localStorage.setItem('transactions', JSON.stringify(transactions));
+            }
+            
+            // Asignar función al scope global para que el onclick funcione
+            window.deleteTransaction = deleteTransaction;
+
+            // Inicialización
+            transactionForm.addEventListener('submit', addTransaction);
+            dateInput.valueAsDate = new Date();
+            updateUI();
+        });
+    </script>
+
+</body>
+</html>
