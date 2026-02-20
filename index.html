@@ -9,16 +9,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
-    <!-- Script de diagnóstico y manejo de errores -->
     <script>
         function handleImageError(img) {
             const parent = img.parentElement;
             if (!parent) return;
-            
             img.style.display = 'none';
-            
             if (parent.querySelector('.image-error')) return;
-
             const filename = img.getAttribute('src');
             const errorMsg = document.createElement('div');
             errorMsg.className = 'image-error';
@@ -42,7 +38,7 @@
             --text-silver: #a1a1aa;
             --glass-bg: rgba(255, 255, 255, 0.03);
             --glass-border: rgba(255, 255, 255, 0.1);
-            --battery-empty: #333;
+            --battery-empty: #222;
         }
 
         * { box-sizing: border-box; }
@@ -61,28 +57,28 @@
             overflow: hidden;
         }
 
-        /* NAVEGACIÓN - DISEÑO TOTALMENTE RESPONSIVO */
+        /* CONTENEDOR PRINCIPAL */
         .slide-container {
             width: 100%;
             height: 100%;
-            max-width: 1400px;
+            max-width: 100%;
             max-height: 100%;
             background-color: var(--bg-obsidian);
             position: absolute;
             display: none; 
             flex-direction: column;
-            padding: 40px 6%;
+            padding: 5% 6%;
             box-shadow: 0 0 100px rgba(0,0,0,1);
-            transition: opacity 0.5s ease;
+            transition: opacity 0.4s ease;
             overflow-y: auto; 
             scrollbar-width: thin;
             scrollbar-color: var(--remedy-crimson) transparent;
         }
 
-        /* Ajuste para desktop cuando la pantalla es muy ancha para evitar que el contenido se estire demasiado */
-        @media (min-width: 1200px) and (min-height: 800px) {
+        @media (min-width: 1024px) {
             .slide-container {
-                height: 85vh;
+                max-width: 1400px;
+                max-height: 85vh;
                 border-radius: 4px;
                 border: 1px solid var(--glass-border);
             }
@@ -90,92 +86,103 @@
 
         .slide-container.active {
             display: flex;
-            animation: fadeIn 0.6s ease-out;
+            animation: fadeIn 0.6s ease-out forwards;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; filter: blur(10px); }
-            to { opacity: 1; filter: blur(0); }
+            from { opacity: 0; transform: scale(0.98); filter: blur(10px); }
+            to { opacity: 1; transform: scale(1); filter: blur(0); }
         }
 
         .slide-container::after {
             content: '';
             position: absolute;
-            bottom: -10%;
-            left: -10%;
-            width: 60%;
-            height: 60%;
+            bottom: -5%;
+            left: -5%;
+            width: 40%;
+            height: 40%;
             background: radial-gradient(circle, var(--remedy-crimson-glow) 0%, transparent 70%);
             filter: blur(80px);
             z-index: 0;
             pointer-events: none;
         }
 
-        h1, h2, h3 { font-family: 'Bebas Neue', sans-serif; margin: 0; letter-spacing: 2px; }
+        /* TIPOGRAFÍA DINÁMICA */
+        h1, h2, h3 { font-family: 'Bebas Neue', sans-serif; margin: 0; letter-spacing: 1px; }
 
         .slide-title {
-            font-size: clamp(36px, 6vw, 64px);
-            margin-bottom: 30px;
+            font-size: clamp(32px, 8vw, 64px);
+            margin-bottom: 25px;
             color: var(--text-white);
-            border-bottom: 4px solid var(--remedy-crimson);
+            border-bottom: 3px solid var(--remedy-crimson);
             display: inline-block;
             line-height: 1;
-            padding-bottom: 10px;
+            padding-bottom: 5px;
             z-index: 1;
-            width: fit-content;
+            word-wrap: break-word;
         }
 
-        p, li, td, th { font-size: clamp(15px, 2vw, 19px); line-height: 1.6; color: var(--text-silver); font-weight: 400; }
+        p, li, td, th { 
+            font-size: clamp(14px, 4vw, 18px); 
+            line-height: 1.5; 
+            color: var(--text-silver); 
+            font-weight: 400; 
+        }
+        
+        @media (min-width: 768px) {
+            p, li, td, th { font-size: 19px; }
+        }
+
         strong { color: var(--text-white); font-weight: 600; }
 
-        /* HUD INFERIOR ADAPTATIVO */
+        /* HUD INFERIOR */
         .ui-footer {
             position: fixed;
-            bottom: 20px;
+            bottom: 15px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
             align-items: center;
-            gap: 15px;
-            background: rgba(0,0,0,0.9);
-            padding: 10px 20px;
-            border-radius: 8px;
+            gap: 12px;
+            background: rgba(0,0,0,0.95);
+            padding: 8px 15px;
+            border-radius: 6px;
             border: 1px solid var(--glass-border);
-            backdrop-filter: blur(15px);
+            backdrop-filter: blur(20px);
             z-index: 1000;
             width: auto;
-            max-width: 95vw;
+            max-width: 90vw;
         }
 
         .nav-btn {
             background: transparent;
             border: 1px solid var(--glass-border);
             color: var(--text-white);
-            width: 44px;
-            height: 44px;
+            width: 38px;
+            height: 38px;
             border-radius: 4px;
             display: flex;
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 18px;
+            transition: all 0.2s ease;
+            font-size: 16px;
             flex-shrink: 0;
         }
 
         .nav-btn:hover {
             background: var(--remedy-crimson);
             border-color: var(--remedy-crimson);
-            box-shadow: 0 0 15px var(--remedy-crimson-glow);
+            box-shadow: 0 0 10px var(--remedy-crimson-glow);
         }
 
-        .battery-icon { display: flex; align-items: center; gap: 8px; }
-        .battery-svg { width: 30px; height: 18px; stroke: var(--text-silver); fill: none; stroke-width: 2.5; }
-        .slide-counter { font-family: 'Bebas Neue', sans-serif; font-size: 24px; color: var(--text-white); min-width: 20px; text-align: center; }
+        .battery-icon { display: flex; align-items: center; gap: 6px; }
+        .battery-svg { width: 24px; height: 14px; stroke: var(--text-silver); fill: none; stroke-width: 2.5; }
+        .slide-counter { font-family: 'Bebas Neue', sans-serif; font-size: 20px; color: var(--text-white); min-width: 15px; text-align: center; }
         
-        .battery-bar { display: flex; gap: 4px; height: 20px; }
-        .bar-segment { width: clamp(12px, 3vw, 50px); height: 100%; background: var(--battery-empty); border-radius: 1px; transition: all 0.4s ease; }
-        .bar-segment.filled { background: var(--remedy-crimson); box-shadow: 0 0 12px var(--remedy-crimson-glow); }
+        .battery-bar { display: flex; gap: 3px; height: 18px; }
+        .bar-segment { width: clamp(10px, 3vw, 45px); height: 100%; background: var(--battery-empty); border-radius: 1px; transition: all 0.4s ease; }
+        .bar-segment.filled { background: var(--remedy-crimson); box-shadow: 0 0 10px var(--remedy-crimson-glow); }
 
         /* CONTENIDO */
         .content-area { 
@@ -185,49 +192,64 @@
             justify-content: center; 
             z-index: 1; 
             width: 100%;
-            padding-bottom: 80px; /* Espacio para el footer */
+            padding-bottom: 80px; 
         }
         
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+        .grid-2 { display: grid; grid-template-columns: 1fr; gap: 25px; align-items: center; }
         
-        /* RESPONSIVE PARA FORMATO VERTICAL (MOBILE Y TABLET) */
-        @media (max-width: 900px) {
-            .grid-2 { grid-template-columns: 1fr; gap: 30px; }
-            .slide-container { 
-                padding: 30px 20px 100px 20px; 
-                justify-content: flex-start;
-            }
-            .content-area { justify-content: flex-start; }
-            .slide-title { margin-bottom: 25px; }
-            .hero-title { font-size: clamp(55px, 18vw, 100px); }
+        @media (min-width: 900px) {
+            .grid-2 { grid-template-columns: 1fr 1fr; gap: 40px; }
         }
 
-        /* Estilos de elementos visuales */
-        .card { background: var(--glass-bg); border: 1px solid var(--glass-border); padding: 25px; backdrop-filter: blur(10px); border-radius: 4px; }
+        /* ELEMENTOS VISUALES */
+        .card { background: var(--glass-bg); border: 1px solid var(--glass-border); padding: 20px; backdrop-filter: blur(10px); border-radius: 4px; }
         
         .image-frame { 
             border: 1px solid var(--remedy-crimson); 
-            padding: 10px; 
+            padding: 8px; 
             background: #111; 
             position: relative; 
-            min-height: 200px; 
+            min-height: 180px; 
             display: flex; 
             align-items: center; 
             justify-content: center; 
             text-align: center; 
             width: 100%;
+            overflow: hidden;
         }
         
-        .image-frame img { width: 100%; height: auto; max-height: 400px; object-fit: contain; display: block; filter: grayscale(10%) contrast(1.1); }
-        .image-error { font-family: 'Bebas Neue'; font-size: 14px; padding: 20px; line-height: 1.2; color: #ffffff; }
+        .image-frame img { width: 100%; height: auto; max-height: 350px; object-fit: contain; display: block; filter: grayscale(10%) contrast(1.1); }
+        .image-error { font-family: 'Bebas Neue'; font-size: 13px; padding: 15px; line-height: 1.2; color: #ffffff; }
 
-        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-        th { text-align: left; font-family: 'Bebas Neue', sans-serif; font-size: clamp(20px, 4vw, 28px); color: var(--remedy-crimson); border-bottom: 2px solid var(--remedy-crimson); padding: 10px 5px; }
-        td { padding: 15px 5px; border-bottom: 1px solid var(--glass-border); font-size: clamp(14px, 3vw, 18px); }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th { text-align: left; font-family: 'Bebas Neue', sans-serif; font-size: clamp(18px, 4vw, 24px); color: var(--remedy-crimson); border-bottom: 2px solid var(--remedy-crimson); padding: 8px 4px; }
+        td { padding: 12px 4px; border-bottom: 1px solid var(--glass-border); font-size: clamp(13px, 3.5vw, 17px); }
 
-        /* Portada */
-        .hero-title { font-size: clamp(70px, 15vw, 150px); line-height: 0.8; margin-bottom: 0.2em; text-transform: uppercase; }
-        .hero-subtitle { font-size: clamp(16px, 4vw, 24px); text-transform: uppercase; letter-spacing: clamp(4px, 2vw, 10px); color: var(--ethereal-cyan); margin-top: 15px; font-weight: 300; }
+        /* PORTADA ESPECIAL */
+        .hero-title { 
+            font-size: clamp(48px, 16vw, 140px); 
+            line-height: 0.8; 
+            margin-bottom: 15px; 
+            text-transform: uppercase; 
+            word-break: break-word;
+            overflow-wrap: break-word;
+        }
+        .hero-subtitle { 
+            font-size: clamp(14px, 4.5vw, 22px); 
+            text-transform: uppercase; 
+            letter-spacing: clamp(2px, 2vw, 8px); 
+            color: var(--ethereal-cyan); 
+            margin-top: 10px; 
+            font-weight: 400; 
+        }
+
+        /* AJUSTES PARA PANTALLAS MUY PEQUEÑAS */
+        @media (max-width: 360px) {
+            .slide-container { padding: 30px 15px 90px 15px; }
+            .hero-title { font-size: 42px; }
+            .ui-footer { gap: 8px; padding: 6px 10px; }
+            .bar-segment { width: 8px; }
+        }
     </style>
 </head>
 <body>
@@ -253,12 +275,10 @@
         </button>
     </div>
 
-    <!-- DIAPOSITIVAS -->
-    
     <!-- 01: Portada -->
     <div class="slide-container active">
         <div class="content-area">
-            <p style="color: var(--remedy-crimson); font-weight: 700; margin-bottom: 10px; letter-spacing: 3px; font-size: 0.75em;">REMEDY_SECURE_ACCESS_GRANTED</p>
+            <p style="color: var(--remedy-crimson); font-weight: 700; margin-bottom: 5px; letter-spacing: 2px; font-size: clamp(10px, 3vw, 14px);">REMEDY_SECURE_ACCESS_GRANTED</p>
             <h1 class="hero-title">REMEDY<br><span style="color: var(--remedy-crimson);">ENTERTAINMENT</span></h1>
             <div class="hero-subtitle">ANÁLISIS DE ORGANIZACIÓN 2026</div>
         </div>
@@ -271,7 +291,7 @@
             <div class="grid-2">
                 <div>
                     <p>Fundada en 1995, Remedy ha evolucionado hasta convertirse en un pilar de la <strong>narrativa transmedia</strong> global, fusionando cine y videojuegos.</p>
-                    <p style="margin-top: 20px;">Su enfoque en la calidad cinematográfica y el desarrollo de tecnología propia (Northlight) les otorga una firma artística única en la industria.</p>
+                    <p style="margin-top: 15px;">Su enfoque en la calidad cinematográfica y tecnología propia (Northlight) les otorga una firma artística única.</p>
                 </div>
                 <div class="image-frame">
                     <img src="remedy_hq.jpg" alt="[Sede de Remedy]" onerror="handleImageError(this)">
@@ -285,10 +305,10 @@
         <h2 class="slide-title">TAMAÑO Y CAPITAL HUMANO</h2>
         <div class="content-area">
             <div class="grid-2">
-                <div style="font-family: 'Bebas Neue'; font-size: clamp(120px, 25vw, 220px); color: transparent; -webkit-text-stroke: 2px var(--remedy-crimson); line-height: 1; text-align: center;">360+</div>
+                <div style="font-family: 'Bebas Neue'; font-size: clamp(80px, 20vw, 200px); color: transparent; -webkit-text-stroke: 2px var(--remedy-crimson); line-height: 1; text-align: center;">360+</div>
                 <div class="card">
-                    <h3 style="font-size: clamp(26px, 5vw, 34px); color: var(--remedy-crimson); margin-bottom: 15px;">FUERZA LABORAL</h3>
-                    <p>Compuesto por especialistas en narrativa, cine y desarrollo técnico, Remedy opera bajo una filosofía de colaboración abierta y equipos multidisciplinarios altamente especializados.</p>
+                    <h3 style="font-size: clamp(24px, 6vw, 32px); color: var(--remedy-crimson); margin-bottom: 10px;">FUERZA LABORAL</h3>
+                    <p>Expertos en narrativa, cine y tecnología operando bajo una filosofía de colaboración abierta y equipos multidisciplinarios.</p>
                 </div>
             </div>
         </div>
@@ -300,12 +320,12 @@
         <div class="content-area">
             <div class="grid-2">
                 <div class="card">
-                    <h3 style="color: var(--ethereal-cyan); font-size: clamp(22px, 4.5vw, 32px);">TECNOLOGÍA NORTHLIGHT</h3>
-                    <p>Un motor propietario avanzado que permite una integración perfecta entre la narrativa grabada en live-action y el gameplay fotorrealista de alta fidelidad.</p>
+                    <h3 style="color: var(--ethereal-cyan); font-size: clamp(20px, 5vw, 28px);">TECNOLOGÍA NORTHLIGHT</h3>
+                    <p>Motor avanzado que integra perfectamente la narrativa live-action con el gameplay fotorrealista.</p>
                 </div>
-                <div class="card">
-                    <h3 style="color: var(--remedy-crimson); font-size: clamp(22px, 4.5vw, 32px);">MODELO FINANCIERO</h3>
-                    <p>Estructura de ingresos robusta fundamentada en alianzas estratégicas a largo plazo con gigantes como Epic Games y Rockstar Games.</p>
+                <div class="card" style="margin-top: 10px;">
+                    <h3 style="color: var(--remedy-crimson); font-size: clamp(20px, 5vw, 28px);">MODELO FINANCIERO</h3>
+                    <p>Estructura basada en alianzas estratégicas a largo plazo con gigantes como Epic Games y Rockstar Games.</p>
                 </div>
             </div>
         </div>
@@ -315,17 +335,17 @@
     <div class="slide-container">
         <h2 class="slide-title">RED DE INTERDEPENDENCIA</h2>
         <div class="content-area">
-            <div class="card" style="margin-bottom: 30px;">
-                <p>La organización mantiene alianzas críticas que garantizan la viabilidad de sus proyectos de gran presupuesto (AAA):</p>
+            <div class="card" style="margin-bottom: 20px;">
+                <p>Alianzas críticas que garantizan la viabilidad de sus proyectos AAA:</p>
             </div>
             <div class="grid-2">
-                <div style="border-left: 5px solid var(--remedy-crimson); padding-left: 20px;">
-                    <h3 style="font-size: clamp(22px, 4.5vw, 30px);">EPIC GAMES</h3>
-                    <p>Socio fundamental para el financiamiento masivo y la distribución global de sus títulos más recientes.</p>
+                <div style="border-left: 4px solid var(--remedy-crimson); padding-left: 15px;">
+                    <h3 style="font-size: clamp(20px, 5vw, 26px);">EPIC GAMES</h3>
+                    <p>Socio fundamental para financiamiento masivo y distribución global.</p>
                 </div>
-                <div style="border-left: 5px solid var(--ethereal-cyan); padding-left: 20px;">
-                    <h3 style="font-size: clamp(22px, 4.5vw, 30px);">NVIDIA</h3>
-                    <p>Colaboración técnica esencial para implementar tecnologías de vanguardia como el Ray Tracing completo.</p>
+                <div style="border-left: 4px solid var(--ethereal-cyan); padding-left: 15px;">
+                    <h3 style="font-size: clamp(20px, 5vw, 26px);">NVIDIA</h3>
+                    <p>Colaboración técnica esencial para implementar Ray Tracing de última generación.</p>
                 </div>
             </div>
         </div>
@@ -336,9 +356,9 @@
         <h2 class="slide-title">INSUMOS OPERATIVOS</h2>
         <div class="content-area">
             <ul style="list-style: none; padding: 0;">
-                <li style="margin-bottom: 25px;"><i class="fas fa-microchip" style="color: var(--remedy-crimson); margin-right: 20px; font-size: 1.2em;"></i> Hardware de última generación y gran capacidad de procesamiento para renderizado.</li>
-                <li style="margin-bottom: 25px;"><i class="fas fa-user-ninja" style="color: var(--remedy-crimson); margin-right: 20px; font-size: 1.2em;"></i> Talento creativo diverso y actores profesionales para captura de movimiento y voz.</li>
-                <li style="margin-bottom: 25px;"><i class="fas fa-file-invoice-dollar" style="color: var(--remedy-crimson); margin-right: 20px; font-size: 1.2em;"></i> Capital de inversión a largo plazo para ciclos de desarrollo extensos (4 a 6 años).</li>
+                <li style="margin-bottom: 15px;"><i class="fas fa-microchip" style="color: var(--remedy-crimson); margin-right: 15px;"></i> Hardware de última generación para renderizado masivo.</li>
+                <li style="margin-bottom: 15px;"><i class="fas fa-user-ninja" style="color: var(--remedy-crimson); margin-right: 15px;"></i> Talento creativo y actores para captura de movimiento.</li>
+                <li style="margin-bottom: 15px;"><i class="fas fa-file-invoice-dollar" style="color: var(--remedy-crimson); margin-right: 15px;"></i> Inversión a largo plazo para ciclos de desarrollo extensos.</li>
             </ul>
         </div>
     </div>
@@ -347,10 +367,10 @@
     <div class="slide-container">
         <h2 class="slide-title">ACTIVIDAD PRINCIPAL</h2>
         <div class="content-area">
-            <div class="image-frame" style="max-width: 800px; margin: 0 auto 30px auto;">
+            <div class="image-frame" style="max-width: 600px; margin: 0 auto 20px auto;">
                 <img src="remedy_games.jpg" alt="[Juegos de Remedy]" onerror="handleImageError(this)">
             </div>
-            <p style="text-align: center; max-width: 900px; margin: 0 auto;"><strong>Creación de Universos:</strong> Remedy se especializa en el desarrollo de videojuegos AAA con una carga narrativa profunda y mecánicas de acción innovadoras.</p>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto;"><strong>Creación de Universos:</strong> Desarrollo de videojuegos AAA con carga narrativa profunda y mecánicas innovadoras.</p>
         </div>
     </div>
 
@@ -364,13 +384,13 @@
                         <tr>
                             <th>NIVEL</th>
                             <th>LÍDER</th>
-                            <th>MISIÓN ESTRATÉGICA</th>
+                            <th>MISIÓN</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td><strong>Estratégico</strong></td><td>Tero Virtala</td><td>CEO / Dirección del Negocio y Crecimiento</td></tr>
-                        <tr><td><strong>Creativo</strong></td><td>Sam Lake</td><td>Creative Director / Guion y Visión de Marca</td></tr>
-                        <tr><td><strong>Técnico</strong></td><td>Mika Vehkala</td><td>CTO / Evolución del Motor Northlight</td></tr>
+                        <tr><td><strong>Estratégico</strong></td><td>Tero Virtala</td><td>CEO / Dirección de Crecimiento</td></tr>
+                        <tr><td><strong>Creativo</strong></td><td>Sam Lake</td><td>Narrativa y Visión de Marca</td></tr>
+                        <tr><td><strong>Técnico</strong></td><td>Mika Vehkala</td><td>CTO / Innovación Northlight</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -379,8 +399,8 @@
 
     <!-- 09: Cierre -->
     <div class="slide-container" style="justify-content: center; align-items: center; text-align: center;">
-        <h1 style="font-size: clamp(60px, 20vw, 180px); color: var(--remedy-crimson);">FIN</h1>
-        <p style="margin-top: 40px; color: var(--ethereal-cyan); font-weight: bold; letter-spacing: 3px; font-size: 1.1em;">FEBRERO 2026 | ANÁLISIS DE ORGANIZACIÓN</p>
+        <h1 style="font-size: clamp(60px, 20vw, 160px); color: var(--remedy-crimson);">FIN</h1>
+        <p style="margin-top: 25px; color: var(--ethereal-cyan); font-weight: bold; letter-spacing: 2px; font-size: clamp(14px, 4vw, 18px);">FEBRERO 2026 | ANÁLISIS DE ORGANIZACIÓN</p>
     </div>
 
     <script>
@@ -420,8 +440,6 @@
 
             slides[currentSlide].classList.add('active');
             updateBattery();
-            
-            // Regresar al inicio del scroll en la nueva diapositiva
             slides[currentSlide].scrollTop = 0;
         }
 
