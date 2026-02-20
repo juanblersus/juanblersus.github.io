@@ -9,25 +9,30 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
-    <!-- Script de utilidad movido al head para evitar ReferenceError -->
+    <!-- Script de diagnóstico y manejo de errores -->
     <script>
         function handleImageError(img) {
             const parent = img.parentElement;
             if (!parent) return;
             
+            // Ocultamos la imagen rota
             img.style.display = 'none';
             
-            // Verificar si ya existe un mensaje de error para no duplicarlo
+            // Si ya hay un mensaje de error, no añadimos otro
             if (parent.querySelector('.image-error')) return;
 
+            const filename = img.getAttribute('src');
             const errorMsg = document.createElement('div');
             errorMsg.className = 'image-error';
             errorMsg.innerHTML = `
-                <i class="fas fa-exclamation-triangle"></i><br>
-                ERROR 404: ARCHIVO NO ENCONTRADO<br>
-                <span style="font-size: 10px; color: white; opacity: 0.5; text-transform: none;">
-                    Verifica que "${img.getAttribute('src')}" esté en la carpeta raíz.
-                </span>`;
+                <i class="fas fa-exclamation-triangle" style="font-size: 30px; margin-bottom: 10px;"></i><br>
+                <span style="color: #e21e26; font-weight: bold;">ERROR DE CARGA (404)</span><br>
+                <div style="background: rgba(255,255,255,0.05); padding: 10px; margin-top: 10px; border-radius: 4px; font-family: monospace; font-size: 12px; text-transform: none; color: #fff;">
+                    Buscando: <strong>${filename}</strong>
+                </div>
+                <p style="font-size: 11px; color: #a1a1aa; margin-top: 10px; text-transform: none;">
+                    GitHub es sensible a mayúsculas. Revisa si el archivo termina en .jpg, .JPG, .png o .PNG y asegúrate de que coincida exactamente.
+                </p>`;
             parent.appendChild(errorMsg);
         }
     </script>
@@ -60,7 +65,7 @@
             overflow: hidden;
         }
 
-        /* NAVEGACIÓN ENTRE DIAPOSITIVAS */
+        /* NAVEGACIÓN */
         .slide-container {
             width: 1280px;
             height: 720px;
@@ -83,7 +88,6 @@
             to { opacity: 1; filter: blur(0); }
         }
 
-        /* EFECTOS DE FONDO */
         .slide-container::after {
             content: '';
             position: absolute;
@@ -97,7 +101,6 @@
             pointer-events: none;
         }
 
-        /* TIPOGRAFÍA */
         h1, h2, h3 { font-family: 'Bebas Neue', sans-serif; margin: 0; letter-spacing: 2px; }
 
         .slide-title {
@@ -114,7 +117,7 @@
         p, li, td, th { font-size: 20px; line-height: 1.6; color: var(--text-silver); font-weight: 300; }
         strong { color: var(--text-white); font-weight: 600; }
 
-        /* INTERFAZ HUD INFERIOR */
+        /* HUD INFERIOR */
         .ui-footer {
             position: fixed;
             bottom: 40px;
@@ -129,7 +132,6 @@
             border: 1px solid var(--glass-border);
             backdrop-filter: blur(10px);
             z-index: 100;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
         .nav-btn {
@@ -153,62 +155,24 @@
             box-shadow: 0 0 15px var(--remedy-crimson-glow);
         }
 
-        .battery-icon {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+        .battery-icon { display: flex; align-items: center; gap: 8px; }
+        .battery-svg { width: 30px; height: 18px; stroke: var(--text-silver); fill: none; stroke-width: 2.5; }
+        .slide-counter { font-family: 'Bebas Neue', sans-serif; font-size: 26px; color: var(--text-white); min-width: 20px; text-align: center; }
+        .battery-bar { display: flex; gap: 5px; height: 22px; }
+        .bar-segment { width: 50px; height: 100%; background: var(--battery-empty); border-radius: 1px; transition: all 0.4s ease; }
+        .bar-segment.filled { background: var(--remedy-crimson); box-shadow: 0 0 12px var(--remedy-crimson-glow); }
 
-        .battery-svg {
-            width: 30px;
-            height: 18px;
-            stroke: var(--text-silver);
-            fill: none;
-            stroke-width: 2.5;
-        }
-
-        .slide-counter {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 26px;
-            color: var(--text-white);
-            min-width: 20px;
-            text-align: center;
-        }
-
-        .battery-bar {
-            display: flex;
-            gap: 5px;
-            height: 22px;
-        }
-
-        .bar-segment {
-            width: 50px;
-            height: 100%;
-            background: var(--battery-empty);
-            border-radius: 1px;
-            transition: all 0.4s ease;
-        }
-
-        .bar-segment.filled {
-            background: var(--remedy-crimson);
-            box-shadow: 0 0 12px var(--remedy-crimson-glow);
-        }
-
-        /* DISEÑO DE CONTENIDO */
+        /* CONTENIDO E IMÁGENES */
         .content-area { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; z-index: 1; }
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
-        .card {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            padding: 30px;
-            backdrop-filter: blur(10px);
-        }
+        .card { background: var(--glass-bg); border: 1px solid var(--glass-border); padding: 30px; backdrop-filter: blur(10px); }
+        
         .image-frame { 
             border: 1px solid var(--remedy-crimson); 
             padding: 10px; 
             background: #111; 
             position: relative; 
-            min-height: 200px; 
+            min-height: 250px; 
             display: flex; 
             align-items: center; 
             justify-content: center; 
@@ -216,11 +180,11 @@
         }
         .image-frame img { width: 100%; height: auto; display: block; filter: grayscale(10%) contrast(1.1); }
         .image-error { 
-            color: var(--remedy-crimson); 
             font-family: 'Bebas Neue'; 
-            font-size: 16px; 
+            font-size: 14px; 
             padding: 20px;
-            line-height: 1.2;
+            line-height: 1.4;
+            color: #ffffff;
         }
 
         table { width: 100%; border-collapse: collapse; margin-top: 20px; }
@@ -230,7 +194,7 @@
 </head>
 <body>
 
-    <!-- HUD Inferior con Controles Integrados -->
+    <!-- HUD Inferior -->
     <div class="ui-footer">
         <button class="nav-btn" onclick="changeSlide(-1)" title="Anterior">
             <i class="fas fa-chevron-left"></i>
@@ -244,41 +208,41 @@
             <div class="slide-counter" id="current-number">1</div>
         </div>
 
-        <div class="battery-bar" id="battery-progress">
-            <!-- Segmentos dinámicos -->
-        </div>
+        <div class="battery-bar" id="battery-progress"></div>
 
         <button class="nav-btn" onclick="changeSlide(1)" title="Siguiente">
             <i class="fas fa-chevron-right"></i>
         </button>
     </div>
 
-    <!-- Diapositiva 1: Portada -->
+    <!-- Diapositivas -->
+    <!-- Portada -->
     <div class="slide-container active">
-        <div class="content-area" style="text-align: left;">
+        <div class="content-area">
             <p style="color: var(--remedy-crimson); font-weight: 700; margin-bottom: 10px; letter-spacing: 4px;">REMEDY_SECURE_ACCESS_GRANTED</p>
             <h1 style="font-size: 140px; line-height: 0.85;">REMEDY<br><span style="color: var(--remedy-crimson);">ENTERTAINMENT</span></h1>
             <div style="font-size: 24px; text-transform: uppercase; letter-spacing: 8px; color: var(--ethereal-cyan); margin-top: 20px;">ANÁLISIS DE ORGANIZACIÓN 2026</div>
         </div>
     </div>
 
-    <!-- Diapositiva 2: Historia -->
+    <!-- Historia -->
     <div class="slide-container">
         <h2 class="slide-title">SEMBLANZA E HISTORIA</h2>
         <div class="content-area">
             <div class="grid-2">
                 <div>
-                    <p>Fundada en 1995, la organización ha evolucionado de un pequeño equipo en Finlandia a un gigante de la <strong>narrativa transmedia</strong>.</p>
-                    <p style="margin-top: 20px;">Su cultura corporativa prioriza el riesgo creativo y la innovación técnica, creando mundos donde lo imposible parece tangible.</p>
+                    <p>Fundada en 1995, Remedy ha evolucionado hasta convertirse en un pilar de la <strong>narrativa transmedia</strong>.</p>
+                    <p style="margin-top: 20px;">Su enfoque en la calidad cinematográfica y el desarrollo de tecnología propia les permite crear experiencias únicas.</p>
                 </div>
                 <div class="image-frame">
-                    <img src="./1536914919238.jpg" alt="[Sede de Remedy]" onerror="handleImageError(this)">
+                    <!-- Usamos rutas relativas directas -->
+                    <img src="1536914919238.jpg" alt="[Sede de Remedy]" onerror="handleImageError(this)">
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Diapositiva 3: Tamaño -->
+    <!-- Tamaño -->
     <div class="slide-container">
         <h2 class="slide-title">TAMAÑO Y CAPITAL HUMANO</h2>
         <div class="content-area">
@@ -286,73 +250,73 @@
                 <div style="font-family: 'Bebas Neue'; font-size: 200px; color: transparent; -webkit-text-stroke: 2px var(--remedy-crimson); line-height: 1;">360+</div>
                 <div class="card">
                     <h3 style="font-size: 32px; color: var(--remedy-crimson); margin-bottom: 15px;">FUERZA LABORAL</h3>
-                    <p>Compuesto por especialistas en narrativa, cine y desarrollo técnico. La empresa opera en múltiples proyectos simultáneos bajo una filosofía de colaboración abierta.</p>
+                    <p>Compuesto por especialistas en narrativa, cine y desarrollo técnico, operando bajo una filosofía de colaboración abierta.</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Diapositiva 4: Recursos Tecnológicos -->
+    <!-- Recursos -->
     <div class="slide-container">
         <h2 class="slide-title">RECURSOS ESTRATÉGICOS</h2>
         <div class="content-area">
             <div class="grid-2">
                 <div class="card">
                     <h3 style="color: var(--ethereal-cyan); font-size: 30px;">TECNOLOGÍA NORTHLIGHT</h3>
-                    <p>Recurso propietario que permite efectos visuales únicos, asegurando una firma visual cinematográfica inconfundible.</p>
+                    <p>Motor propio que permite una integración fluida entre narrativa y gameplay de alta fidelidad.</p>
                 </div>
                 <div class="card">
                     <h3 style="color: var(--remedy-crimson); font-size: 30px;">MODELO FINANCIERO</h3>
-                    <p>Estructura de ingresos basada en co-publicación estratégica y explotación de propiedad intelectual propia.</p>
+                    <p>Estructura de ingresos sólida basada en alianzas con grandes distribuidores globales.</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Diapositiva 5: Interdependencia -->
+    <!-- Interdependencia -->
     <div class="slide-container">
         <h2 class="slide-title">RED DE INTERDEPENDENCIA</h2>
         <div class="content-area">
             <div class="card" style="margin-bottom: 30px;">
-                <p>Remedy mantiene alianzas críticas con actores globales para su funcionamiento:</p>
+                <p>Alianzas críticas que permiten la viabilidad de sus proyectos AAA:</p>
             </div>
             <div class="grid-2">
                 <div style="border-left: 4px solid var(--remedy-crimson); padding-left: 20px;">
                     <h3>EPIC GAMES</h3>
-                    <p>Socio estratégico para el financiamiento y distribución de proyectos AAA.</p>
+                    <p>Socio estratégico para financiamiento y publicación masiva.</p>
                 </div>
                 <div style="border-left: 4px solid var(--ethereal-cyan); padding-left: 20px;">
                     <h3>NVIDIA</h3>
-                    <p>Colaboración técnica para optimización de Ray Tracing y DLSS.</p>
+                    <p>Soporte técnico para tecnologías de renderizado de vanguardia.</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Diapositiva 6: Insumos -->
+    <!-- Insumos -->
     <div class="slide-container">
         <h2 class="slide-title">INSUMOS OPERATIVOS</h2>
         <div class="content-area">
             <ul style="list-style: none; padding: 0;">
-                <li style="margin-bottom: 25px; font-size: 24px;"><i class="fas fa-microchip" style="color: var(--remedy-crimson); margin-right: 20px;"></i> Hardware de alto rendimiento para renderizado masivo.</li>
-                <li style="margin-bottom: 25px; font-size: 24px;"><i class="fas fa-user-ninja" style="color: var(--remedy-crimson); margin-right: 20px;"></i> Talento creativo y estudios de captura de movimiento.</li>
-                <li style="margin-bottom: 25px; font-size: 24px;"><i class="fas fa-file-invoice-dollar" style="color: var(--remedy-crimson); margin-right: 20px;"></i> Inversión de capital para ciclos de desarrollo multianuales.</li>
+                <li style="margin-bottom: 25px; font-size: 24px;"><i class="fas fa-microchip" style="color: var(--remedy-crimson); margin-right: 20px;"></i> Hardware de alto rendimiento y servidores.</li>
+                <li style="margin-bottom: 25px; font-size: 24px;"><i class="fas fa-user-ninja" style="color: var(--remedy-crimson); margin-right: 20px;"></i> Talento multidisciplinario y actores especializados.</li>
+                <li style="margin-bottom: 25px; font-size: 24px;"><i class="fas fa-file-invoice-dollar" style="color: var(--remedy-crimson); margin-right: 20px;"></i> Inversión multianual para ciclos de desarrollo.</li>
             </ul>
         </div>
     </div>
 
-    <!-- Diapositiva 7: Actividad Principal -->
+    <!-- Actividad Principal -->
     <div class="slide-container">
         <h2 class="slide-title">ACTIVIDAD PRINCIPAL</h2>
         <div class="content-area">
             <div class="image-frame" style="max-width: 680px; margin: 0 auto 30px auto;">
-                <img src="./XHDR56DH7ZLMRES3GWVHTUQAKM.jpg" alt="[Juegos de Remedy]" onerror="handleImageError(this)">
+                <img src="XHDR56DH7ZLMRES3GWVHTUQAKM.jpg" alt="[Juegos de Remedy]" onerror="handleImageError(this)">
             </div>
-            <p style="text-align: center;"><strong>Creación de Mundos:</strong> Remedy se dedica al desarrollo de videojuegos AAA de alta carga narrativa, ofreciendo productos interactivos premium.</p>
+            <p style="text-align: center;"><strong>Creación de Mundos:</strong> Remedy desarrolla videojuegos AAA con alto componente narrativo y cinematográfico.</p>
         </div>
     </div>
 
-    <!-- Diapositiva 8: Organigrama -->
+    <!-- Organigrama -->
     <div class="slide-container">
         <h2 class="slide-title">ORGANIGRAMA Y ESTRUCTURA</h2>
         <div class="content-area">
@@ -360,27 +324,25 @@
                 <thead>
                     <tr>
                         <th>NIVEL</th>
-                        <th>REPRESENTANTE</th>
-                        <th>FUNCIÓN</th>
+                        <th>LÍDER</th>
+                        <th>MISIÓN</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr><td><strong>Estratégico</strong></td><td>Tero Virtala</td><td>CEO / Gestión de Negocios y Crecimiento</td></tr>
-                    <tr><td><strong>Creativo</strong></td><td>Sam Lake</td><td>Director Creativo / Narrativa de Marca</td></tr>
-                    <tr><td><strong>Técnico</strong></td><td>Mika Vehkala</td><td>CTO / Innovación Tecnológica Northlight</td></tr>
+                    <tr><td><strong>Estratégico</strong></td><td>Tero Virtala</td><td>CEO / Dirección de Negocio</td></tr>
+                    <tr><td><strong>Creativo</strong></td><td>Sam Lake</td><td>Narrativa y Visión Creativa</td></tr>
+                    <tr><td><strong>Técnico</strong></td><td>Mika Vehkala</td><td>CTO / Innovación Tecnológica</td></tr>
                 </tbody>
             </table>
         </div>
     </div>
 
-    <!-- Diapositiva 9: Final -->
+    <!-- Cierre -->
     <div class="slide-container" style="justify-content: center; align-items: center; text-align: center;">
         <h1 style="font-size: 160px; color: var(--remedy-crimson);">FIN</h1>
-        <div style="font-size: 24px; color: var(--text-white); letter-spacing: 10px;">PROYECTO ANALIZADO</div>
-        <p style="margin-top: 40px; color: var(--ethereal-cyan); font-weight: bold;">FECHA DE CIERRE: FEBRERO 20, 2026</p>
+        <p style="margin-top: 40px; color: var(--ethereal-cyan); font-weight: bold;">FEBRERO 2026 | ANÁLISIS CORPORATIVO</p>
     </div>
 
-    <!-- Scripts de lógica de presentación -->
     <script>
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide-container');
