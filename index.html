@@ -8,6 +8,30 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Script de utilidad movido al head para evitar ReferenceError -->
+    <script>
+        function handleImageError(img) {
+            const parent = img.parentElement;
+            if (!parent) return;
+            
+            img.style.display = 'none';
+            
+            // Verificar si ya existe un mensaje de error para no duplicarlo
+            if (parent.querySelector('.image-error')) return;
+
+            const errorMsg = document.createElement('div');
+            errorMsg.className = 'image-error';
+            errorMsg.innerHTML = `
+                <i class="fas fa-exclamation-triangle"></i><br>
+                ERROR 404: ARCHIVO NO ENCONTRADO<br>
+                <span style="font-size: 10px; color: white; opacity: 0.5; text-transform: none;">
+                    Verifica que "${img.getAttribute('src')}" esté en la carpeta raíz.
+                </span>`;
+            parent.appendChild(errorMsg);
+        }
+    </script>
+
     <style>
         :root {
             --bg-obsidian: #050505;
@@ -108,7 +132,6 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        /* BOTONES DE NAVEGACIÓN (INTEGRADOS) */
         .nav-btn {
             background: transparent;
             border: 1px solid var(--glass-border);
@@ -180,8 +203,25 @@
             padding: 30px;
             backdrop-filter: blur(10px);
         }
-        .image-frame { border: 1px solid var(--remedy-crimson); padding: 10px; background: #111; position: relative; }
+        .image-frame { 
+            border: 1px solid var(--remedy-crimson); 
+            padding: 10px; 
+            background: #111; 
+            position: relative; 
+            min-height: 200px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            text-align: center; 
+        }
         .image-frame img { width: 100%; height: auto; display: block; filter: grayscale(10%) contrast(1.1); }
+        .image-error { 
+            color: var(--remedy-crimson); 
+            font-family: 'Bebas Neue'; 
+            font-size: 16px; 
+            padding: 20px;
+            line-height: 1.2;
+        }
 
         table { width: 100%; border-collapse: collapse; margin-top: 20px; }
         th { text-align: left; font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: var(--remedy-crimson); border-bottom: 2px solid var(--remedy-crimson); padding: 10px; }
@@ -232,7 +272,7 @@
                     <p style="margin-top: 20px;">Su cultura corporativa prioriza el riesgo creativo y la innovación técnica, creando mundos donde lo imposible parece tangible.</p>
                 </div>
                 <div class="image-frame">
-                    <img src="1536914919238.jpg" alt="Sede de Remedy Entertainment en Espoo">
+                    <img src="./1536914919238.jpg" alt="[Sede de Remedy]" onerror="handleImageError(this)">
                 </div>
             </div>
         </div>
@@ -245,7 +285,7 @@
             <div class="grid-2">
                 <div style="font-family: 'Bebas Neue'; font-size: 200px; color: transparent; -webkit-text-stroke: 2px var(--remedy-crimson); line-height: 1;">360+</div>
                 <div class="card">
-                    <h3 style="font-size: 32px; color: var(--remedy-crimson); margin-bottom: 15px;">ESTRUCTURA DE EQUIPO</h3>
+                    <h3 style="font-size: 32px; color: var(--remedy-crimson); margin-bottom: 15px;">FUERZA LABORAL</h3>
                     <p>Compuesto por especialistas en narrativa, cine y desarrollo técnico. La empresa opera en múltiples proyectos simultáneos bajo una filosofía de colaboración abierta.</p>
                 </div>
             </div>
@@ -306,7 +346,7 @@
         <h2 class="slide-title">ACTIVIDAD PRINCIPAL</h2>
         <div class="content-area">
             <div class="image-frame" style="max-width: 680px; margin: 0 auto 30px auto;">
-                <img src="XHDR56DH7ZLMRES3GWVHTUQAKM.jpg" alt="Videojuegos de Remedy">
+                <img src="./XHDR56DH7ZLMRES3GWVHTUQAKM.jpg" alt="[Juegos de Remedy]" onerror="handleImageError(this)">
             </div>
             <p style="text-align: center;"><strong>Creación de Mundos:</strong> Remedy se dedica al desarrollo de videojuegos AAA de alta carga narrativa, ofreciendo productos interactivos premium.</p>
         </div>
@@ -340,6 +380,7 @@
         <p style="margin-top: 40px; color: var(--ethereal-cyan); font-weight: bold;">FECHA DE CIERRE: FEBRERO 20, 2026</p>
     </div>
 
+    <!-- Scripts de lógica de presentación -->
     <script>
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide-container');
