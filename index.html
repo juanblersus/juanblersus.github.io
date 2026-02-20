@@ -27,11 +27,11 @@
             errorMsg.innerHTML = `
                 <i class="fas fa-exclamation-triangle" style="font-size: 30px; margin-bottom: 10px;"></i><br>
                 <span style="color: #e21e26; font-weight: bold;">ERROR DE CARGA (404)</span><br>
-                <div style="background: rgba(255,255,255,0.05); padding: 10px; margin-top: 10px; border-radius: 4px; font-family: monospace; font-size: 12px; text-transform: none; color: #fff;">
+                <div style="background: rgba(255,255,255,0.05); padding: 10px; margin-top: 10px; border-radius: 4px; font-family: monospace; font-size: 12px; text-transform: none; color: #fff; overflow-wrap: break-word;">
                     Buscando: <strong>${filename}</strong>
                 </div>
                 <p style="font-size: 11px; color: #a1a1aa; margin-top: 10px; text-transform: none;">
-                    GitHub es sensible a mayúsculas. Asegúrate de que el archivo en tu carpeta se llame exactamente igual (todo en minúsculas).
+                    GitHub es sensible a mayúsculas. Asegúrate de que el archivo se llame igual.
                 </p>`;
             parent.appendChild(errorMsg);
         }
@@ -59,23 +59,26 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             font-family: 'Montserrat', sans-serif;
             color: var(--text-white);
             overflow: hidden;
         }
 
-        /* NAVEGACIÓN */
+        /* NAVEGACIÓN - RESPONSIVA */
         .slide-container {
-            width: 1280px;
-            height: 720px;
+            width: 100vw;
+            height: 100vh;
+            max-width: 1280px;
+            max-height: 720px;
             background-color: var(--bg-obsidian);
             position: absolute;
             display: none; 
             flex-direction: column;
-            padding: 80px;
+            padding: 5% 8%;
             box-shadow: 0 0 100px rgba(0,0,0,1);
             transition: opacity 0.5s ease;
+            overflow-y: auto; /* Permite scroll si el contenido desborda en móvil */
         }
 
         .slide-container.active {
@@ -104,8 +107,8 @@
         h1, h2, h3 { font-family: 'Bebas Neue', sans-serif; margin: 0; letter-spacing: 2px; }
 
         .slide-title {
-            font-size: 64px;
-            margin-bottom: 50px;
+            font-size: clamp(32px, 5vw, 64px);
+            margin-bottom: 5vh;
             color: var(--text-white);
             border-bottom: 4px solid var(--remedy-crimson);
             display: inline-block;
@@ -114,39 +117,42 @@
             z-index: 1;
         }
 
-        p, li, td, th { font-size: 20px; line-height: 1.6; color: var(--text-silver); font-weight: 300; }
+        p, li, td, th { font-size: clamp(14px, 1.8vw, 20px); line-height: 1.6; color: var(--text-silver); font-weight: 300; }
         strong { color: var(--text-white); font-weight: 600; }
 
         /* HUD INFERIOR */
         .ui-footer {
             position: fixed;
-            bottom: 40px;
+            bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
             align-items: center;
-            gap: 25px;
-            background: rgba(0,0,0,0.6);
-            padding: 12px 25px;
+            gap: 15px;
+            background: rgba(0,0,0,0.8);
+            padding: 8px 15px;
             border-radius: 8px;
             border: 1px solid var(--glass-border);
             backdrop-filter: blur(10px);
             z-index: 100;
+            width: fit-content;
+            max-width: 95vw;
         }
 
         .nav-btn {
             background: transparent;
             border: 1px solid var(--glass-border);
             color: var(--text-white);
-            width: 45px;
-            height: 45px;
+            width: 35px;
+            height: 35px;
             border-radius: 4px;
             display: flex;
             justify-content: center;
             align-items: center;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 18px;
+            font-size: 14px;
+            flex-shrink: 0;
         }
 
         .nav-btn:hover {
@@ -155,41 +161,38 @@
             box-shadow: 0 0 15px var(--remedy-crimson-glow);
         }
 
-        .battery-icon { display: flex; align-items: center; gap: 8px; }
-        .battery-svg { width: 30px; height: 18px; stroke: var(--text-silver); fill: none; stroke-width: 2.5; }
-        .slide-counter { font-family: 'Bebas Neue', sans-serif; font-size: 26px; color: var(--text-white); min-width: 20px; text-align: center; }
-        .battery-bar { display: flex; gap: 5px; height: 22px; }
-        .bar-segment { width: 50px; height: 100%; background: var(--battery-empty); border-radius: 1px; transition: all 0.4s ease; }
+        .battery-icon { display: flex; align-items: center; gap: 5px; }
+        .battery-svg { width: 25px; height: 14px; stroke: var(--text-silver); fill: none; stroke-width: 2.5; }
+        .slide-counter { font-family: 'Bebas Neue', sans-serif; font-size: 20px; color: var(--text-white); min-width: 15px; text-align: center; }
+        
+        .battery-bar { display: flex; gap: 3px; height: 16px; }
+        .bar-segment { width: clamp(20px, 4vw, 50px); height: 100%; background: var(--battery-empty); border-radius: 1px; transition: all 0.4s ease; }
         .bar-segment.filled { background: var(--remedy-crimson); box-shadow: 0 0 12px var(--remedy-crimson-glow); }
 
         /* CONTENIDO E IMÁGENES */
-        .content-area { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; z-index: 1; }
+        .content-area { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; z-index: 1; width: 100%; }
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
-        .card { background: var(--glass-bg); border: 1px solid var(--glass-border); padding: 30px; backdrop-filter: blur(10px); }
         
-        .image-frame { 
-            border: 1px solid var(--remedy-crimson); 
-            padding: 10px; 
-            background: #111; 
-            position: relative; 
-            min-height: 250px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            text-align: center; 
-        }
-        .image-frame img { width: 100%; height: auto; display: block; filter: grayscale(10%) contrast(1.1); }
-        .image-error { 
-            font-family: 'Bebas Neue'; 
-            font-size: 14px; 
-            padding: 20px;
-            line-height: 1.4;
-            color: #ffffff;
+        @media (max-width: 768px) {
+            .grid-2 { grid-template-columns: 1fr; gap: 20px; }
+            .slide-container { padding: 40px 20px 100px 20px; }
+            .slide-title { margin-bottom: 20px; }
+            .ui-footer { bottom: 10px; gap: 10px; padding: 5px 10px; }
+            .bar-segment { width: 15px; }
         }
 
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th { text-align: left; font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: var(--remedy-crimson); border-bottom: 2px solid var(--remedy-crimson); padding: 10px; }
-        td { padding: 15px 10px; border-bottom: 1px solid var(--glass-border); }
+        .card { background: var(--glass-bg); border: 1px solid var(--glass-border); padding: 20px; backdrop-filter: blur(10px); }
+        .image-frame { border: 1px solid var(--remedy-crimson); padding: 8px; background: #111; position: relative; min-height: 150px; display: flex; align-items: center; justify-content: center; text-align: center; }
+        .image-frame img { width: 100%; height: auto; display: block; filter: grayscale(10%) contrast(1.1); }
+        .image-error { font-family: 'Bebas Neue'; font-size: 14px; padding: 15px; line-height: 1.2; color: #ffffff; }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        th { text-align: left; font-family: 'Bebas Neue', sans-serif; font-size: clamp(18px, 3vw, 28px); color: var(--remedy-crimson); border-bottom: 2px solid var(--remedy-crimson); padding: 8px; }
+        td { padding: 10px 8px; border-bottom: 1px solid var(--glass-border); }
+
+        /* Estilos específicos para la portada */
+        .hero-title { font-size: clamp(60px, 12vw, 140px); line-height: 0.85; }
+        .hero-subtitle { font-size: clamp(14px, 2.5vw, 24px); text-transform: uppercase; letter-spacing: 5px; color: var(--ethereal-cyan); margin-top: 20px; }
     </style>
 </head>
 <body>
@@ -219,9 +222,9 @@
     <!-- Portada -->
     <div class="slide-container active">
         <div class="content-area">
-            <p style="color: var(--remedy-crimson); font-weight: 700; margin-bottom: 10px; letter-spacing: 4px;">REMEDY_SECURE_ACCESS_GRANTED</p>
-            <h1 style="font-size: 140px; line-height: 0.85;">REMEDY<br><span style="color: var(--remedy-crimson);">ENTERTAINMENT</span></h1>
-            <div style="font-size: 24px; text-transform: uppercase; letter-spacing: 8px; color: var(--ethereal-cyan); margin-top: 20px;">ANÁLISIS DE ORGANIZACIÓN 2026</div>
+            <p style="color: var(--remedy-crimson); font-weight: 700; margin-bottom: 10px; letter-spacing: 2px;">REMEDY_SECURE_ACCESS_GRANTED</p>
+            <h1 class="hero-title">REMEDY<br><span style="color: var(--remedy-crimson);">ENTERTAINMENT</span></h1>
+            <div class="hero-subtitle">ANÁLISIS DE ORGANIZACIÓN 2026</div>
         </div>
     </div>
 
@@ -246,9 +249,9 @@
         <h2 class="slide-title">TAMAÑO Y CAPITAL HUMANO</h2>
         <div class="content-area">
             <div class="grid-2">
-                <div style="font-family: 'Bebas Neue'; font-size: 200px; color: transparent; -webkit-text-stroke: 2px var(--remedy-crimson); line-height: 1;">360+</div>
+                <div style="font-family: 'Bebas Neue'; font-size: clamp(100px, 15vw, 200px); color: transparent; -webkit-text-stroke: 2px var(--remedy-crimson); line-height: 1;">360+</div>
                 <div class="card">
-                    <h3 style="font-size: 32px; color: var(--remedy-crimson); margin-bottom: 15px;">FUERZA LABORAL</h3>
+                    <h3 style="font-size: clamp(24px, 4vw, 32px); color: var(--remedy-crimson); margin-bottom: 15px;">FUERZA LABORAL</h3>
                     <p>Compuesto por especialistas en narrativa, cine y desarrollo técnico, operando bajo una filosofía de colaboración abierta.</p>
                 </div>
             </div>
@@ -261,11 +264,11 @@
         <div class="content-area">
             <div class="grid-2">
                 <div class="card">
-                    <h3 style="color: var(--ethereal-cyan); font-size: 30px;">TECNOLOGÍA NORTHLIGHT</h3>
+                    <h3 style="color: var(--ethereal-cyan); font-size: clamp(20px, 3.5vw, 30px);">TECNOLOGÍA NORTHLIGHT</h3>
                     <p>Motor propio que permite una integración fluida entre narrativa y gameplay de alta fidelidad.</p>
                 </div>
                 <div class="card">
-                    <h3 style="color: var(--remedy-crimson); font-size: 30px;">MODELO FINANCIERO</h3>
+                    <h3 style="color: var(--remedy-crimson); font-size: clamp(20px, 3.5vw, 30px);">MODELO FINANCIERO</h3>
                     <p>Estructura de ingresos sólida basada en alianzas con grandes distribuidores globales.</p>
                 </div>
             </div>
@@ -280,12 +283,12 @@
                 <p>Alianzas críticas que permiten la viabilidad de sus proyectos AAA:</p>
             </div>
             <div class="grid-2">
-                <div style="border-left: 4px solid var(--remedy-crimson); padding-left: 20px;">
-                    <h3>EPIC GAMES</h3>
+                <div style="border-left: 4px solid var(--remedy-crimson); padding-left: 15px;">
+                    <h3 style="font-size: clamp(20px, 3vw, 28px);">EPIC GAMES</h3>
                     <p>Socio estratégico para financiamiento y publicación masiva.</p>
                 </div>
-                <div style="border-left: 4px solid var(--ethereal-cyan); padding-left: 20px;">
-                    <h3>NVIDIA</h3>
+                <div style="border-left: 4px solid var(--ethereal-cyan); padding-left: 15px;">
+                    <h3 style="font-size: clamp(20px, 3vw, 28px);">NVIDIA</h3>
                     <p>Soporte técnico para tecnologías de renderizado de vanguardia.</p>
                 </div>
             </div>
@@ -297,9 +300,9 @@
         <h2 class="slide-title">INSUMOS OPERATIVOS</h2>
         <div class="content-area">
             <ul style="list-style: none; padding: 0;">
-                <li style="margin-bottom: 25px; font-size: 24px;"><i class="fas fa-microchip" style="color: var(--remedy-crimson); margin-right: 20px;"></i> Hardware de alto rendimiento y servidores.</li>
-                <li style="margin-bottom: 25px; font-size: 24px;"><i class="fas fa-user-ninja" style="color: var(--remedy-crimson); margin-right: 20px;"></i> Talento multidisciplinario y actores especializados.</li>
-                <li style="margin-bottom: 25px; font-size: 24px;"><i class="fas fa-file-invoice-dollar" style="color: var(--remedy-crimson); margin-right: 20px;"></i> Inversión multianual para ciclos de desarrollo.</li>
+                <li style="margin-bottom: 20px;"><i class="fas fa-microchip" style="color: var(--remedy-crimson); margin-right: 15px;"></i> Hardware de alto rendimiento y servidores.</li>
+                <li style="margin-bottom: 20px;"><i class="fas fa-user-ninja" style="color: var(--remedy-crimson); margin-right: 15px;"></i> Talento multidisciplinario y actores especializados.</li>
+                <li style="margin-bottom: 20px;"><i class="fas fa-file-invoice-dollar" style="color: var(--remedy-crimson); margin-right: 15px;"></i> Inversión multianual para ciclos de desarrollo.</li>
             </ul>
         </div>
     </div>
@@ -308,7 +311,7 @@
     <div class="slide-container">
         <h2 class="slide-title">ACTIVIDAD PRINCIPAL</h2>
         <div class="content-area">
-            <div class="image-frame" style="max-width: 680px; margin: 0 auto 30px auto;">
+            <div class="image-frame" style="max-width: 680px; width: 100%; margin: 0 auto 20px auto;">
                 <img src="remedy_games.jpg" alt="[Juegos de Remedy]" onerror="handleImageError(this)">
             </div>
             <p style="text-align: center;"><strong>Creación de Mundos:</strong> Remedy desarrolla videojuegos AAA con alto componente narrativo y cinematográfico.</p>
@@ -319,27 +322,29 @@
     <div class="slide-container">
         <h2 class="slide-title">ORGANIGRAMA Y ESTRUCTURA</h2>
         <div class="content-area">
-            <table>
-                <thead>
-                    <tr>
-                        <th>NIVEL</th>
-                        <th>LÍDER</th>
-                        <th>MISIÓN</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td><strong>Estratégico</strong></td><td>Tero Virtala</td><td>CEO / Dirección de Negocio</td></tr>
-                    <tr><td><strong>Creativo</strong></td><td>Sam Lake</td><td>Narrativa y Visión Creativa</td></tr>
-                    <tr><td><strong>Técnico</strong></td><td>Mika Vehkala</td><td>CTO / Innovación Tecnológica</td></tr>
-                </tbody>
-            </table>
+            <div style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>NIVEL</th>
+                            <th>LÍDER</th>
+                            <th>MISIÓN</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Estratégico</strong></td><td>Tero Virtala</td><td>CEO / Dirección de Negocio</td></tr>
+                        <tr><td><strong>Creativo</strong></td><td>Sam Lake</td><td>Narrativa y Visión Creativa</td></tr>
+                        <tr><td><strong>Técnico</strong></td><td>Mika Vehkala</td><td>CTO / Innovación Tecnológica</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
     <!-- Cierre -->
     <div class="slide-container" style="justify-content: center; align-items: center; text-align: center;">
-        <h1 style="font-size: 160px; color: var(--remedy-crimson);">FIN</h1>
-        <p style="margin-top: 40px; color: var(--ethereal-cyan); font-weight: bold;">FEBRERO 2026 | ANÁLISIS CORPORATIVO</p>
+        <h1 style="font-size: clamp(60px, 15vw, 160px); color: var(--remedy-crimson);">FIN</h1>
+        <p style="margin-top: 30px; color: var(--ethereal-cyan); font-weight: bold; letter-spacing: 2px;">FEBRERO 2026 | ANÁLISIS CORPORATIVO</p>
     </div>
 
     <script>
@@ -379,6 +384,9 @@
 
             slides[currentSlide].classList.add('active');
             updateBattery();
+            
+            // Scroll al inicio de la diapositiva al cambiar (útil en móvil)
+            slides[currentSlide].scrollTop = 0;
         }
 
         window.onload = initBattery;
